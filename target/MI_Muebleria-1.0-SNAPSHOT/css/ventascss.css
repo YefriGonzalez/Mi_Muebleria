@@ -1,0 +1,157 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    background: url(../Imagenes/fondoventa.jpg);
+    background-size: cover;   
+}
+
+.logout{
+    width: 100%;
+}
+.logout ul{
+    margin-right: 10px;
+    list-style: none;
+}
+.cerrarSesion>li{
+    text-decoration: none;
+    text-align: right;
+}
+.cerrarSesion>li>a{
+    padding: 15px 20px;
+    color: #1b4f72;
+    font-family: sans-serif;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: bold;
+    border: 2px solid #1b4f72;
+    border-radius: 5%;
+    background: white;
+}
+header{
+    margin-top: 20px;
+    text-align: center;
+    font-size: 50px;
+    font-weight: bold;
+    font-family: sans-serif;
+    color: white;
+}
+.ventas{
+    width: 100%;
+}
+
+.nav{
+    text-align: center;
+    margin: 0;
+    margin-top: 50px;
+    width: 100%;
+    background:  #1b4f72;
+}
+.nav ul{
+    list-style: none;
+}
+.menu >li{
+    position: relative;
+    display: inline-block;
+}
+
+.menu > li:hover{
+    background: #3498db;
+    transition: all .3s;
+}
+
+.menu > li > a{
+    display: block;
+    padding: 15px 20px;
+    color: white;
+    font-family: sans-serif;
+    text-decoration: none;
+    font-size: 30px;
+    font-weight: bold;
+}
+form{
+    height: 500px;
+    position: absolute;
+    box-sizing: border-box;
+    background: #f9f7f7;
+    display: none;  
+}
+.menu>li>ul{
+    list-style: none;
+}
+.submenu li:hover{
+    background: #3498db;
+    transition: all .3s;
+}
+.submenu>li>a{
+    display: block;
+    padding: 15px 20px;
+    color: white;
+    font-family: sans-serif;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: bold;
+}
+.submenu{
+    position: absolute;
+    visibility: hidden;
+    background: #1b4f72;
+    width: 300px;
+    opacity: 0;
+    transition: opacity 1.5s;
+}
+.submenu li{
+    width: 300px;
+}
+.submenu form{
+    margin-left: 100%; 
+    position: relative; 
+    
+}
+.menu>#sub:hover .submenu{
+    visibility: visible;
+    opacity: 1;
+}
+.menu>#sub>ul>li:hover form{
+    display:inline-block;
+}
+form{
+    text-align: center;
+    width: 200%;
+    height: 110px;
+    padding: 5px;
+    border: 1px solid white;
+    box-sizing: border-box;
+}
+.menu >li:hover .form{
+    display: block;
+}
+
+form input{
+    width: 95%;
+    height: 50px;
+    margin-top: 8px;
+}
+
+.form input[type="submit"]{
+    margin-top: 10px;
+    width: 100%;
+    height: 65px;
+    background: #1b4f72;
+    color:white;
+    cursor: pointer;
+    border: 1px solid white;
+    font-size: 25px;
+    font-weight: 900;
+}
+
+form input[type="submit"]:hover{
+    background: #3498db;
+}
+
+h3{
+    margin-top: 16px;
+    font-size: 22px;
+}

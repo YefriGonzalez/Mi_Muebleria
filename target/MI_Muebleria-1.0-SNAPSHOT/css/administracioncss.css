@@ -1,0 +1,22 @@
+.logout{
+    width: 100%;
+}
+.logout ul{
+    margin-right: 10px;
+    list-style: none;
+}
+.cerrarSesion>li{
+    text-decoration: none;
+    text-align: right;
+}
+.cerrarSesion>li>a{
+    padding: 15px 20px;
+    color: #1b4f72;
+    font-family: sans-serif;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: bold;
+    border: 2px solid #1b4f72;
+    border-radius: 5%;
+    background: white;
+}
