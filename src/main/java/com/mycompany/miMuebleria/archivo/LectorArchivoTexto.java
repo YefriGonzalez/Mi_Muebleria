@@ -11,6 +11,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 
 /**
  *
@@ -23,12 +25,27 @@ public class LectorArchivoTexto {
     private static final String INICIO_ENSAMBLE_PIEZA="ENSAMBLE_PIEZAS(";
     private static final String INICIO_ENSAMBLE_MUEBLE="ENSAMBLAR_MUEBLE(";
     private static final String INICIO_CLIENTE="CLIENTE(";
-    public void leerArchivo(File file) throws FileNotFoundException, IOException {
-        FileReader fr = new FileReader(file);
-        BufferedReader br = new BufferedReader(fr);
+    
+    public void leerArchivo(InputStream inputStream) throws FileNotFoundException, IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(inputStream,"utf-8"));
         String linea;
         while ((linea = br.readLine()) != null) {
-            
+            separarCamposUsuario(linea);
+        }
+        while ((linea = br.readLine()) != null) {
+            separarCamposPieza(linea);
+        }
+        while ((linea = br.readLine()) != null) {
+            separarCamposMueble(linea);
+        }
+        while ((linea = br.readLine()) != null) {
+            separarCamposEnsamblePiezas(linea);
+        }
+        while ((linea = br.readLine()) != null) {
+            separarCamposEnsambleMueble(linea);
+        }
+        while ((linea = br.readLine()) != null) {
+            separarCamposCliente(linea);
         }
     }
     
@@ -68,7 +85,7 @@ public class LectorArchivoTexto {
         if (linea.contains(INICIO_ENSAMBLE_MUEBLE)) {
             String lineaDeCampos = linea.substring(INICIO_ENSAMBLE_MUEBLE.length(), linea.length() - 1);
             String[] campos = lineaDeCampos.split(",");
-            EnsambleMueble ensableMueble = new EnsambleMueble(campos[0],campos[1],campos[2]);
+            EnsambleMueble ensableMueble = new EnsambleMueble(campos[0],campos[1],campos[2],campos[3]);
         }
     }
     

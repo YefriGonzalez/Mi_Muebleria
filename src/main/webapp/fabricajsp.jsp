@@ -10,7 +10,7 @@
     <body>  
         <header>Area de Fabrica</header>
         <div class="logout">
-             <ul class="cerrarSesion">
+            <ul class="cerrarSesion">
                 <li><a href="CerrarSesion">Cerrar Sesion</a></li>
             </ul>
         </div>
@@ -61,11 +61,15 @@
                     </li>
                     <li><a href="">Consultar Informacion de los muebles Creados</a></li>
                     <li><a href="">Consultar cantidad de Piezas</a></li>
-                    <li><a href="hola">Cargar Archivo</a>
-                        
-                    </li>
+
                 </ul>
             </nav>
+        </div>
+        <div class="archivoCarga">
+            <form class="archivo" method="POST" action="" enctype="multipart/form-data">
+                <input type="file" name="fileCarga" required>
+                <input type="submit" value="Enviar Archivo">
+            </form>
         </div>
     </body>
 </html>

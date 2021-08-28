@@ -13,15 +13,17 @@ import java.time.LocalDate;
  */
 public class EnsambleMueble {
 
-    Mueble mueble;
-    Usuario usuario;
-    LocalDate fecha;
+    private Mueble mueble;
+    private Usuario usuario;
+    private LocalDate fecha;
+    private Double costo;
 
-    public EnsambleMueble(String mueble,String usuario, String fecha) {
+    public EnsambleMueble(String mueble,String usuario, String fecha,String costo) {
         try {
             this.mueble = (Mueble) (Object) mueble;
             this.usuario = (Usuario) (Object) usuario;
             this.fecha = convertirFecha(fecha);
+            this.costo=Double.valueOf(costo);
         } catch (Exception e) {
         }
     }
@@ -58,6 +60,14 @@ public class EnsambleMueble {
             this.fecha = convertirFecha(fecha);   
         } catch (Exception e) {
         }
+    }
+
+    public Double getCosto() {
+        return costo;
+    }
+
+    public void setCosto(Double costo) {
+        this.costo = costo;
     }
 
     public static LocalDate convertirFecha(String fecha) {

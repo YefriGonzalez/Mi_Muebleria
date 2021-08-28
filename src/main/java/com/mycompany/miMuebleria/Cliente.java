@@ -12,7 +12,7 @@ package com.mycompany.miMuebleria;
 public class Cliente {
 
     private String nombre;
-    private Integer NIT;
+    private String NIT;
     private String direccion;
     private String municipio;
     private String departamento;
@@ -20,7 +20,7 @@ public class Cliente {
     public Cliente(String nombre, String nit, String direccion, String municipio, String departamento) {
         try {
             this.nombre = nombre;
-            this.NIT = Integer.valueOf(nit);
+            this.NIT = nit;
             this.direccion = direccion;
             this.municipio = municipio;
             this.departamento = departamento;
@@ -31,7 +31,7 @@ public class Cliente {
     public Cliente(String nombre, String nit, String direccion) {
         try {
             this.nombre = nombre;
-            this.NIT = Integer.valueOf(nit);
+            this.NIT = nit;
             this.direccion = direccion;
         } catch (NumberFormatException e) {
         }
@@ -46,13 +46,13 @@ public class Cliente {
         this.nombre = nombre;
     }
 
-    public Integer getNIT() {
+    public String getNIT() {
         return NIT;
     }
 
     public void setNIT(String NIT) {
         try {
-            this.NIT = Integer.valueOf(NIT);
+            this.NIT = NIT;
         } catch (NumberFormatException e) {
         }
 
