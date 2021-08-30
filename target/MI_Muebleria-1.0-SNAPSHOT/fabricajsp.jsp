@@ -17,6 +17,9 @@
         <div class="fabrica">
             <nav class="navegacion">
                 <ul class="menu">
+                    <li>
+                        <a href="#">Piezas</a>
+                    </li>
                     <li><a href="#">Crear Pieza</a>
                         <form class="form" method="POST" action="">
                             <input type="text" name="nombreCrearPieza" placeholder="Nombre de la pieza" required>

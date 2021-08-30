@@ -1,8 +1,6 @@
 package com.mycompany.miMuebleria.archivo;
 
 import com.mycompany.miMuebleria.Cliente;
-import com.mycompany.miMuebleria.EnsambleMueble;
-import com.mycompany.miMuebleria.Ensamble_Pieza;
 import com.mycompany.miMuebleria.MiMuebleriaException;
 import com.mycompany.miMuebleria.Mueble;
 import com.mycompany.miMuebleria.Pieza;
@@ -14,17 +12,13 @@ import com.mycompany.mimuebleria.DB.DBMueble;
 import com.mycompany.mimuebleria.DB.DBPieza;
 import com.mycompany.mimuebleria.DB.DBUsuario;
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
-import static java.lang.System.out;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import javax.swing.JOptionPane;
 
 /**
  *

@@ -47,7 +47,7 @@ public class DBUsuario {
                 insert.setString(4, String.valueOf(usuario.getEstado()));
                 insert.execute();
             } catch (SQLException e) {
-                errores1.add(new ERROR("FORMATO: ", "Error al insertar usuario"));
+                errores1.add(new ERROR("FORMATO: " +e.getMessage(), "Error al insertar usuario"));
             }
         } else{
             errores1.add(new ERROR("FORMATO: "+usuario.getPassword(), "Contraseña no compatible"));
