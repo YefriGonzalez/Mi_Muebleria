@@ -13,42 +13,35 @@ import java.time.LocalDate;
  */
 public class EnsambleMueble {
 
-    private Mueble mueble;
-    private Usuario usuario;
+    private String mueble;
+    private String usuario;
     private LocalDate fecha;
     private Double costo;
 
-    public EnsambleMueble(String mueble,String usuario, String fecha,String costo) {
+    public EnsambleMueble(String mueble, String usuario, String fecha, double costo) {
         try {
-            this.mueble = (Mueble) (Object) mueble;
-            this.usuario = (Usuario) (Object) usuario;
+            this.mueble = mueble;
+            this.usuario = usuario;
             this.fecha = convertirFecha(fecha);
-            this.costo=Double.valueOf(costo);
+            this.costo = costo;
         } catch (Exception e) {
         }
     }
 
-    public Mueble getMueble() {
+    public String getMueble() {
         return mueble;
     }
 
     public void setMueble(String mueble) {
-        try {
-            this.mueble = (Mueble)(Object) mueble;
-        } catch (Exception e) {
-        }
+        this.mueble = mueble;
     }
 
-    public Usuario getUsuario() {
+    public String getUsuario() {
         return usuario;
     }
 
     public void setUsuario(String usuario) {
-        try {
-            this.usuario = (Usuario) (Object) usuario;
-        } catch (Exception e) {
-        }
-        
+        this.usuario = usuario;
     }
 
     public LocalDate getFecha() {
@@ -56,12 +49,9 @@ public class EnsambleMueble {
     }
 
     public void setFecha(String fecha) {
-        try {
-            this.fecha = convertirFecha(fecha);   
-        } catch (Exception e) {
-        }
+        this.fecha = convertirFecha(fecha);
     }
-
+    
     public Double getCosto() {
         return costo;
     }
@@ -75,7 +65,7 @@ public class EnsambleMueble {
         int dia = Integer.valueOf(fechaDividida[0]);
         int mes = Integer.valueOf(fechaDividida[1]);
         int anio = Integer.valueOf(fechaDividida[2]);
-        return LocalDate.of(dia, mes, anio);
+        return LocalDate.of(anio, mes, dia);
     }
 
 }

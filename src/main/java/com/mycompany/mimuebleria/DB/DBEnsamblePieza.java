@@ -7,11 +7,14 @@ package com.mycompany.mimuebleria.DB;
 
 import com.mycompany.miMuebleria.Ensamble_Pieza;
 import com.mycompany.miMuebleria.MiMuebleriaException;
+import com.mycompany.miMuebleria.archivo.ERROR;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -19,16 +22,28 @@ import java.util.logging.Logger;
  */
 public class DBEnsamblePieza {
 
-    public void validarDatosExistentes(Ensamble_Pieza ensamblePieza) throws SQLException, MiMuebleriaException {
+    private double costoEnsamblePieza;
+    ArrayList<ERROR> errores = new ArrayList<>();
+
+    ArrayList<Ensamble_Pieza> ensamblesPiezas = new ArrayList<>();
+
+    public void agregarEnsamblePieza(String mueble, String pieza, String cantidad) throws SQLException, MiMuebleriaException {
+        costoEnsamblePieza = 0;
         try {
-            if (comprobarMueble(ensamblePieza.getMueble().getTipoMueble()) && comprobarPieza(ensamblePieza.getPieza().getTipoPieza(), ensamblePieza.getCantidad())) {
-                PreparedStatement insert = (PreparedStatement) Conexion.conexion().prepareStatement("INSERT INTO ensamble_pieza(mueble,tipoPieza,cantidad) VALUES(?,?,?)");
-                insert.setString(1, ensamblePieza.getMueble().getTipoMueble());
-                insert.setString(2, ensamblePieza.getPieza().getTipoPieza());
-                insert.setInt(3, ensamblePieza.getCantidad());
+            if (comprobarMueble(mueble) && comprobarPieza(pieza, cantidad) && costoEnsamblePieza > 0) {
+                Ensamble_Pieza ensamblePieza = new Ensamble_Pieza(mueble, pieza, cantidad, costoEnsamblePieza);
+                ensamblesPiezas.add(ensamblePieza);
+                PreparedStatement insert = (PreparedStatement) Conexion.conexion().prepareStatement("INSERT IGNORE INTO ensamble_pieza(mueble,tipo,cantidad,costo) VALUES(?,?,?,?)");
+                insert.setString(1, ensamblePieza.getMueble());
+                insert.setString(2, ensamblePieza.getPieza());
+                insert.setString(3, String.valueOf(ensamblePieza.getCantidad()));
+                insert.setString(4, String.valueOf(ensamblePieza.getCosto()));
+                insert.execute();
+            } else {
+                errores.add(new ERROR("FORMATO: " + mueble + ", " + pieza + ", " + cantidad, "Datos incorrectos para  ensamble de  pieza"));
             }
         } catch (MiMuebleriaException e) {
-
+            errores.add(new ERROR("FORMATO: " + e, "Error al agregar ensamble de pieza a DB"));
         }
 
     }
@@ -41,32 +56,53 @@ public class DBEnsamblePieza {
             ResultSet result = consultaMueble.executeQuery();
             muebleExistente = result.next();
         } catch (MiMuebleriaException ex) {
-            Logger.getLogger(DBEnsamblePieza.class.getName()).log(Level.SEVERE, null, ex);
+            errores.add(new ERROR("FORMATO: " + mueble, "Mueble para ensamble de pieza inexistente"));
         }
         return muebleExistente;
     }
 
-    public boolean comprobarPieza(String pieza, int numero) {
+    public boolean comprobarPieza(String pieza, String numero) {
+        int num = Integer.valueOf(numero);
         boolean piezaExistente = false;
         int count = 0;
         try {
-            PreparedStatement consultaPieza = (PreparedStatement) Conexion.conexion().prepareStatement("SELECT *FROM pieza WHERE tipo=?");
-            consultaPieza.setString(1, pieza);
-            ResultSet result = consultaPieza.executeQuery();
-            while (result.next()) {
-                count = result.getInt(1);
-            }
-            if (count == numero && result.next()) {
-                //FALTA ELIMINAR LAS PIEZAS USADAS
-                piezaExistente = true;
+            PreparedStatement consultaCantidadPieza = (PreparedStatement) Conexion.conexion().prepareStatement("SELECT COUNT(*) FROM pieza WHERE tipo=?");
+            consultaCantidadPieza.setString(1, pieza);
+            ResultSet result = consultaCantidadPieza.executeQuery();
+            result.next();
+            count = result.getInt(1);
+            if (count >= num) {
+                if (costoPieza(pieza, num)) {
+                    piezaExistente = true;
+                } else {
+                    piezaExistente = false;
+                }
             } else {
+                errores.add(new ERROR("FORMATO: " + pieza + ": " + num, "No existe el numero de piezas solicitadas"));
                 piezaExistente = false;
             }
-        } catch (Exception e) {
-
+        } catch (NumberFormatException | SQLException | MiMuebleriaException e) {
+            errores.add(new ERROR("FORMATO: " +e, "Error al comprobar piezas"));
         }
-
         return piezaExistente;
+    }
+
+    public boolean costoPieza(String pieza, int num) throws SQLException {
+        boolean PiezasExistente = false;
+        try {
+            PreparedStatement consultaPieza = (PreparedStatement) Conexion.conexion().prepareStatement("SELECT costo FROM pieza WHERE tipo=?");
+            consultaPieza.setString(1, pieza);
+            ResultSet result1 = consultaPieza.executeQuery();
+            if (result1.next()) {
+                costoEnsamblePieza = Double.valueOf(result1.getString(1)) * num;
+                PiezasExistente = true;
+            } else{
+                errores.add(new ERROR("FORMATO: "+pieza, "no se pudo comprobar el costo de pieza"));
+            }
+        } catch (MiMuebleriaException ex) {
+            errores.add(new ERROR("FORMATO: " +ex, "Error al consultar precio de pieza"));
+        }
+        return PiezasExistente;
     }
 
 }

@@ -11,28 +11,27 @@ package com.mycompany.miMuebleria;
  */
 public class Ensamble_Pieza {
 
-    private Pieza pieza;
+    private String pieza;
     private int cantidad;
-    private Mueble mueble;
+    private String mueble;
+    private double costo;
 
-    public Ensamble_Pieza(String pieza, String cantidad, String mueble) {
+    public Ensamble_Pieza(String mueble, String pieza, String cantidad, Double costo) {
         try {
-            this.pieza = (Pieza) (Object) (pieza);
+            this.pieza = pieza;
             this.cantidad = Integer.valueOf(cantidad);
-            this.mueble = (Mueble) (Object) mueble;
+            this.mueble = mueble;
+            this.costo = costo;
         } catch (NumberFormatException e) {
         }
     }
 
-    public Pieza getPieza() {
+    public String getPieza() {
         return pieza;
     }
 
     public void setPieza(String pieza) {
-        try {
-            this.pieza = (Pieza)(Object)pieza;
-        } catch (Exception e) {
-        }
+        this.pieza = pieza;
     }
 
     public int getCantidad() {
@@ -46,15 +45,20 @@ public class Ensamble_Pieza {
         }
     }
 
-    public Mueble getMueble() {
+    public String getMueble() {
         return mueble;
     }
 
     public void setMueble(String mueble) {
-        try {
-            this.mueble = (Mueble)(Object)mueble;
-        } catch (Exception e) {
-        }
+        this.mueble = mueble;
+    }
+
+    public double getCosto() {
+        return costo;
+    }
+
+    public void setCosto(double costo) {
+        this.costo = costo;
     }
 
 }

@@ -7,40 +7,45 @@ package com.mycompany.mimuebleria.DB;
 
 import com.mycompany.miMuebleria.Cliente;
 import com.mycompany.miMuebleria.MiMuebleriaException;
+import com.mycompany.miMuebleria.archivo.ERROR;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author yefri
  */
 public class DBCliente {
-
-    public void AgregarCliente(Cliente cliente) throws MiMuebleriaException{
-        if (!cliente.getNIT().contains("-") && cliente.getMunicipio()!=null) {
+    private static ArrayList<ERROR> errores=new ArrayList<>();
+    public static void AgregarCliente(Cliente cliente) throws MiMuebleriaException{
+        if (cliente.getMunicipio()!=null) {
             try {
-                PreparedStatement insertCliente=(PreparedStatement)Conexion.conexion().prepareStatement("INSERT INTO cliente(nombre,nit,direccion,municipio,departamento VALUES(?,?,?,?,?)");
+                PreparedStatement insertCliente=(PreparedStatement)Conexion.conexion().prepareStatement("INSERT IGNORE INTO cliente(nombre,nit,direccion,municipio,departamento) VALUES(?,?,?,?,?)");
                 insertCliente.setString(1, cliente.getNombre());
                 insertCliente.setString(2, cliente.getNIT());
                 insertCliente.setString(3, cliente.getDireccion());
                 insertCliente.setString(4, cliente.getMunicipio());
                 insertCliente.setString(5, cliente.getDepartamento());
+                insertCliente.execute();
             } catch (MiMuebleriaException | SQLException ex) {
-                Logger.getLogger(DBCliente.class.getName()).log(Level.SEVERE, null, ex);
+                 errores.add(new ERROR("FORMATO: "+cliente.toString(),"Datos Incorrectos de cliente"));
             }
-        } else if(!cliente.getNIT().contains("-") && cliente.getMunicipio()==null){
+        } else if(cliente.getMunicipio()==null){
             try {
-                PreparedStatement insertCliente=(PreparedStatement)Conexion.conexion().prepareStatement("INSERT INTO cliente(nombre,nit,direccion) VALUES(?,?,?,)");
+                PreparedStatement insertCliente=(PreparedStatement)Conexion.conexion().prepareStatement("INSERT IGNORE INTO cliente(nombre,nit,direccion) VALUES(?,?,?)");
                 insertCliente.setString(1, cliente.getNombre());
                 insertCliente.setString(2, cliente.getNIT());
                 insertCliente.setString(3, cliente.getDireccion());
+                insertCliente.execute();
             } catch (MiMuebleriaException | SQLException ex) {
-                Logger.getLogger(DBCliente.class.getName()).log(Level.SEVERE, null, ex);
+                errores.add(new ERROR("FORMATO: "+cliente.toString(),"Datos Incorrectos de cliente"));
             }
         } else{
-            throw new MiMuebleriaException("");
+            errores.add(new ERROR("FORMATO: "+cliente.toString(),"Datos Incorrectos de cliente"));
         }
     }
 }
