@@ -5,6 +5,7 @@ import com.mycompany.miMuebleria.MiMuebleriaException;
 import com.mycompany.miMuebleria.Mueble;
 import com.mycompany.miMuebleria.Pieza;
 import com.mycompany.miMuebleria.Usuario;
+import com.mycompany.mimuebleria.DB.Conexion;
 import com.mycompany.mimuebleria.DB.DBCliente;
 import com.mycompany.mimuebleria.DB.DBEnsambleMueble;
 import com.mycompany.mimuebleria.DB.DBEnsamblePieza;
@@ -17,6 +18,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -37,7 +40,13 @@ public class LectorArchivoTexto {
     private ArrayList<Mueble> muebles = new ArrayList<>();
     private ArrayList<Usuario> usuarios = new ArrayList<>();
     private ArrayList<ERROR> errores=new ArrayList<>();
-    private static int cantidadPieza = 1;
+    private static int cantidadPieza;
+    public LectorArchivoTexto() throws MiMuebleriaException, SQLException{
+        PreparedStatement consulta=(PreparedStatement)Conexion.conexion().prepareStatement("SELECT COUNT(*) FROM pieza");
+        ResultSet result=consulta.executeQuery();
+        result.next();
+        cantidadPieza=result.getInt(1);
+    }
 
     public void leerArchivo(InputStream inputStream) throws FileNotFoundException, IOException, SQLException, MiMuebleriaException {
         BufferedReader br = new BufferedReader(new InputStreamReader(inputStream, "utf-8"));
@@ -55,7 +64,7 @@ public class LectorArchivoTexto {
         }
     }
 
-    public void leerArchivo2(InputStream inputStream) throws UnsupportedEncodingException, IOException, SQLException {
+    public void leerArchivo2(InputStream inputStream) throws UnsupportedEncodingException, IOException, SQLException, MiMuebleriaException {
         String linea;
         BufferedReader br = new BufferedReader(new InputStreamReader(inputStream, "utf-8"));
         while ((linea = br.readLine()) != null) {
@@ -97,12 +106,11 @@ public class LectorArchivoTexto {
         }
     }
 
-    public void separarCamposPieza(String linea) throws SQLException {
+    public void separarCamposPieza(String linea) throws SQLException, MiMuebleriaException {
         if (linea.startsWith(INICIO_PIEZA)) {
             String lineaDeCampos = linea.substring(INICIO_PIEZA.length(), linea.length() - 1);
             String[] campos = lineaDeCampos.split(",");
-            cantidadPieza++;
-            Pieza pieza = new Pieza(campos[0].replaceAll("\"", ""), String.valueOf(cantidadPieza).replaceAll("\"", ""), campos[1].replaceAll("\"", ""));
+            Pieza pieza = new Pieza(campos[0].replaceAll("\"", ""), String.valueOf(LectorArchivoTexto.getCantidadPieza()).replaceAll("\"", ""), campos[1].replaceAll("\"", ""));
             piezas.add(pieza);
             DBPieza.agregarPieza(pieza);
         }

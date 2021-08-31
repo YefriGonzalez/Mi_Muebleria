@@ -1,6 +1,7 @@
 /home/yefri/NetBeansProjects/MI_Muebleria/src/main/java/com/mycompany/miMuebleria/Cliente.java
 /home/yefri/NetBeansProjects/MI_Muebleria/src/main/java/com/mycompany/mimuebleria/DB/DBEnsambleMueble.java
 /home/yefri/NetBeansProjects/MI_Muebleria/src/main/java/com/mycompany/mimuebleria/DB/DBMueble.java
+/home/yefri/NetBeansProjects/MI_Muebleria/src/main/java/com/mycompany/miMuebleria/interfaces/CRUDPIEZA.java
 /home/yefri/NetBeansProjects/MI_Muebleria/src/main/java/com/mycompany/miMuebleria/Pieza.java
 /home/yefri/NetBeansProjects/MI_Muebleria/src/main/java/com/mycompany/mimuebleria/DB/Conexion.java
 /home/yefri/NetBeansProjects/MI_Muebleria/src/main/java/com/mycompany/miMuebleria/servlet/CargaArchivo_Servlet.java
@@ -8,6 +9,7 @@
 /home/yefri/NetBeansProjects/MI_Muebleria/src/main/java/com/mycompany/miMuebleria/servlet/ValidacionUsuario.java
 /home/yefri/NetBeansProjects/MI_Muebleria/src/main/java/com/mycompany/miMuebleria/Ensamble_Pieza.java
 /home/yefri/NetBeansProjects/MI_Muebleria/src/main/java/com/mycompany/mimuebleria/DB/DBCliente.java
+/home/yefri/NetBeansProjects/MI_Muebleria/src/main/java/com/mycompany/miMuebleria/servlet/ControladorPieza.java
 /home/yefri/NetBeansProjects/MI_Muebleria/src/main/java/com/mycompany/miMuebleria/MiMuebleriaException.java
 /home/yefri/NetBeansProjects/MI_Muebleria/src/main/java/com/mycompany/miMuebleria/Usuario.java
 /home/yefri/NetBeansProjects/MI_Muebleria/src/main/java/com/mycompany/miMuebleria/Mueble.java
@@ -15,5 +17,8 @@
 /home/yefri/NetBeansProjects/MI_Muebleria/src/main/java/com/mycompany/mimuebleria/DB/DBPieza.java
 /home/yefri/NetBeansProjects/MI_Muebleria/src/main/java/com/mycompany/mimuebleria/DB/DBUsuario.java
 /home/yefri/NetBeansProjects/MI_Muebleria/src/main/java/com/mycompany/miMuebleria/servlet/Usuario_Servlet.java
+/home/yefri/NetBeansProjects/MI_Muebleria/src/main/java/com/mycompany/miMuebleria/servlet/Piezas_Servlet.java
 /home/yefri/NetBeansProjects/MI_Muebleria/src/main/java/com/mycompany/miMuebleria/servlet/CerrarSesion.java
+/home/yefri/NetBeansProjects/MI_Muebleria/src/main/java/com/mycompany/miMuebleria/DAO/PiezaDAO.java
 /home/yefri/NetBeansProjects/MI_Muebleria/src/main/java/com/mycompany/miMuebleria/archivo/LectorArchivoTexto.java
+/home/yefri/NetBeansProjects/MI_Muebleria/src/main/java/com/mycompany/miMuebleria/archivo/ERROR.java

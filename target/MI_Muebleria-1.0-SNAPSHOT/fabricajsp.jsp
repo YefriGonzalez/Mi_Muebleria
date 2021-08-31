@@ -18,26 +18,9 @@
             <nav class="navegacion">
                 <ul class="menu">
                     <li>
-                        <a href="#">Piezas</a>
+                        <a href="Piezas_Servlet">Piezas</a>
                     </li>
-                    <li><a href="#">Crear Pieza</a>
-                        <form class="form" method="POST" action="">
-                            <input type="text" name="nombreCrearPieza" placeholder="Nombre de la pieza" required>
-                            <hr>
-                            <input type="number" name="costoCrearPieza" placeholder="Costo de la pieza" required>
-                            <hr>
-                            <input type="submit" value="Crear Pieza">
-                        </form> 
-                    </li>
-                    <li><a href="#">Eliminar Pieza</a>
-                        <form class="form" method="POST" action="">
-                            <input type="text" name="nombreEliminarPieza" placeholder="Nombre de la pieza" required>
-                            <hr>
-                            <input type="number" name="cantidadPiezaEliminar" placeholder="Numero de Piezas" required>
-                            <hr>
-                            <input type="submit" value="Eliminar Piezas">
-                        </form> 
-                    </li>
+                    
                     <li><a href="#">Modificar Pieza</a>
                         <form class="form" method="POST" action="">
                             <input type="text" name="nombreCrearPieza" placeholder="Nombre de la pieza" required>

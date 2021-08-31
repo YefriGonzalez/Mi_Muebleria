@@ -6,12 +6,14 @@
 package com.mycompany.miMuebleria.servlet;
 
 import com.mycompany.miMuebleria.MiMuebleriaException;
-import com.mycompany.mimuebleria.DB.Conexion;
-import com.mysql.cj.xdevapi.PreparableStatement;
+import com.mycompany.miMuebleria.Pieza;
+import com.mycompany.miMuebleria.archivo.ERROR;
+import com.mycompany.miMuebleria.archivo.LectorArchivoTexto;
+import com.mycompany.mimuebleria.DB.DBPieza;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -26,7 +28,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(name = "Piezas_Servlet", urlPatterns = {"/Piezas_Servlet"})
 public class Piezas_Servlet extends HttpServlet {
-
+    private ArrayList<ERROR> errores=new ArrayList<>();
     /**
      * Handles the HTTP <code>GET</code> method.
      *
@@ -38,9 +40,13 @@ public class Piezas_Servlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+        DBPieza dbPieza=new DBPieza();
+        List<Pieza> list=new ArrayList<>();
+        list= dbPieza.listar();
+        request.setAttribute("piezalist", list);
+        request.getRequestDispatcher("muebleria/piezasJsp.jsp").forward(request, response);
     }
-
+    
     /**
      * Handles the HTTP <code>POST</code> method.
      *
@@ -52,12 +58,7 @@ public class Piezas_Servlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            PreparableStatement consultaPieza=(PreparableStatement)Conexion.conexion().prepareStatement("SELECT *FROM pieza");
-            
-        } catch (SQLException | MiMuebleriaException ex) {
-            Logger.getLogger(Piezas_Servlet.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        
+       
     }
-    
 }
