@@ -4,7 +4,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link href="css/fabricaCss.css" rel="stylesheet"/>
+        <link href="css1/fabricaCss.css" rel="stylesheet"/>
         <title>Area de Fabrica | Mi Muebleria</title>
     </head>
     <body>  
@@ -20,20 +20,6 @@
                     <li>
                         <a href="Piezas_Servlet">Piezas</a>
                     </li>
-                    
-                    <li><a href="#">Modificar Pieza</a>
-                        <form class="form" method="POST" action="">
-                            <input type="text" name="nombreCrearPieza" placeholder="Nombre de la pieza" required>
-                            <hr>
-                            <input type="number" name="costoCrearPieza" placeholder="Costo de la pieza" required>
-                            <hr>
-                            <input type="text" name="nuevonombreCrearPieza" placeholder="Nuevo Nombre de la pieza" required>
-                            <hr>
-                            <input type="number" name="nuevocostoCrearPieza" placeholder="Nuevo Costo de la pieza" required>
-                            <hr>
-                            <input type="submit" value="Modificar Pieza">
-                        </form> 
-                    </li>
                     <li><a href="#">Ensamblar Muebles a partir de Piezas</a>
                         <form class="form" method="POST" action="">
                             <input type="text" name="tipoMueble" placeholder="Tipo de Mueble" required>
@@ -46,8 +32,13 @@
                         </form>
                     </li>
                     <li><a href="">Consultar Informacion de los muebles Creados</a></li>
-                    <li><a href="">Consultar cantidad de Piezas</a></li>
 
+                    <li id="cons"><a href="">Consultar cantidad de Piezas</a>
+                        <ul class="itemsConsulta">
+                            <li><a href="muebleria/consulta.jsp?consulta=mayorMenor,tipoConsulta=Piezas">Mayor a menor</a></li>
+                            <li><a href="muebleria/consulta.jsp?consulta=menorMayor,tipoConsulta=Piezas">Menor a Mayor</a></li>
+                        </ul>
+                    </li>
                 </ul>
             </nav>
         </div>

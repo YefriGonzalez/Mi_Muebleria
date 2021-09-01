@@ -4,9 +4,14 @@ com/mycompany/miMuebleria/Cliente.class
 com/mycompany/mimuebleria/DB/DBCliente.class
 com/mycompany/miMuebleria/Pieza.class
 com/mycompany/mimuebleria/DB/Conexion.class
+com/mycompany/miMuebleria/servlet/Piezas_Servlet.class
+com/mycompany/miMuebleria/interfaces/CRUDPIEZA.class
 com/mycompany/miMuebleria/Mueble.class
+com/mycompany/miMuebleria/servlet/ControladorPiezaServlet.class
+com/mycompany/miMuebleria/archivo/ERROR.class
 com/mycompany/miMuebleria/archivo/LectorArchivoTexto.class
 com/mycompany/miMuebleria/EnsambleMueble.class
+com/mycompany/miMuebleria/servlet/DeleteServlet.class
 com/mycompany/miMuebleria/servlet/ValidacionUsuario.class
 com/mycompany/mimuebleria/DB/DBPieza.class
 com/mycompany/miMuebleria/servlet/CargaArchivo_Servlet.class
@@ -15,5 +20,6 @@ com/mycompany/miMuebleria/Ensamble_Pieza.class
 com/mycompany/miMuebleria/Usuario.class
 com/mycompany/miMuebleria/servlet/CerrarSesion.class
 com/mycompany/mimuebleria/DB/DBMueble.class
+com/mycompany/miMuebleria/servlet/EditPiezaServlet.class
 com/mycompany/mimuebleria/DB/DBEnsambleMueble.class
 com/mycompany/mimuebleria/DB/DBUsuario.class

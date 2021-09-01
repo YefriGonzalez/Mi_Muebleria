@@ -15,6 +15,6 @@ import java.util.List;
 public interface CRUDPIEZA {
     public List listar();
     public Pieza list(int id);
-    public boolean edit(Pieza pieza);
+    public boolean edit(String pieza,String id,String costo);
     public boolean eliminar(int id);
 }

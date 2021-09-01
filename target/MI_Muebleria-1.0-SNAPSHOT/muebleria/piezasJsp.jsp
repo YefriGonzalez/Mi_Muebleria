@@ -56,7 +56,7 @@
                         <td class="text-center">${pieza.tipoPieza}</td>
                         <td class="text-center">${pieza.costoPieza}</td>
                         <td class="text-center"><a class="btn btn-warnign btn-small" href="muebleria/Editar.jsp?id=${pieza.id}">Editar</a>
-                            <a class="btn btn-danger btn-small" href="" >Eliminar</a>
+                            <a class="btn btn-danger btn-small" method="POST" href="DeleteServlet?id=${pieza.id}" >Eliminar</a>
                         </td>
                     </tr>
                 </c:forEach>

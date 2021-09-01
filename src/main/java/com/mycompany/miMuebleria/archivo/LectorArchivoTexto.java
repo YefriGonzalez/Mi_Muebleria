@@ -42,7 +42,7 @@ public class LectorArchivoTexto {
     private ArrayList<ERROR> errores=new ArrayList<>();
     private static int cantidadPieza;
     public LectorArchivoTexto() throws MiMuebleriaException, SQLException{
-        PreparedStatement consulta=(PreparedStatement)Conexion.conexion().prepareStatement("SELECT COUNT(*) FROM pieza");
+        PreparedStatement consulta=(PreparedStatement)Conexion.conexion().prepareStatement("SELECT MAX(id) from pieza");
         ResultSet result=consulta.executeQuery();
         result.next();
         cantidadPieza=result.getInt(1);

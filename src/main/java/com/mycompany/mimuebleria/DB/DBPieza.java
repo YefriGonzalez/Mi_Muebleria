@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -55,13 +56,11 @@ public class DBPieza implements CRUDPIEZA{
     public Pieza list(int id) {
         Pieza pieza=null;
         try {
-            PreparedStatement consulta=(PreparedStatement)Conexion.conexion().prepareStatement("SELECT *FROM pieza WHERE id=?");
-            consulta.setInt(2, id);
+            PreparedStatement consulta=(PreparedStatement)Conexion.conexion().prepareStatement("SELECT *FROM pieza WHERE id="+id);
             ResultSet result=consulta.executeQuery();
             if (result.next()) {
-                pieza=new Pieza(result.getString(1), String.valueOf(id), result.getString(3));
+                pieza=new Pieza(result.getString(1),result.getString(2), result.getString(3));    
             }
-
         } catch (SQLException | MiMuebleriaException ex) {
             
         }
@@ -69,30 +68,29 @@ public class DBPieza implements CRUDPIEZA{
     }
 
     @Override
-    public boolean edit(Pieza pieza) {
+    public boolean edit(String tipoPieza,String id,String costo) {
         boolean cambio=false;
         try {
-            PreparedStatement update=(PreparedStatement)Conexion.conexion().prepareStatement("UPDATE pieza set tipo=?,costo=? WHERE id=?");
-            update.setString(1,pieza.getTipoPieza());
-            update.setInt(2, pieza.getId());
-            update.setString(3, String.valueOf(pieza.getCostoPieza()));
-            cambio=update.execute();
+            PreparedStatement update=(PreparedStatement)Conexion.conexion().prepareStatement("UPDATE pieza set tipo='"+tipoPieza+"',costo='"+costo+"' WHERE id="+id);
+            update.execute();
+            cambio=true;
         } catch (SQLException | MiMuebleriaException ex) {
-            Logger.getLogger(DBPieza.class.getName()).log(Level.SEVERE, null, ex);
+            errores.add(new ERROR("DELETE", "Error al modificar pieza"));
         }
         return cambio;
     }
 
     @Override
     public boolean eliminar(int id) {
+        boolean delet=false;
         try {
-            PreparedStatement delete=(PreparedStatement)Conexion.conexion().prepareStatement("DELETE FROM pieza WHERE id=?");
-            delete.setString(2,String.valueOf(id));
-            delete.execute();
+            PreparedStatement delete=(PreparedStatement)Conexion.conexion().prepareStatement("DELETE FROM pieza WHERE id="+id);
+            delete.executeUpdate();
+            delet=true;
         } catch (SQLException | MiMuebleriaException ex) {
             errores.add(new ERROR("DELETE", "Error al eliminar pieza"));
         }
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return delet;
     }
     
 }

@@ -20,7 +20,7 @@ public class Pieza {
     private int id;
 
     public Pieza(String tipoPieza, String id, String costoPieza) throws MiMuebleriaException, SQLException {
-        PreparedStatement consulta = (PreparedStatement) Conexion.conexion().prepareStatement("SELECT COUNT(*) FROM pieza");
+        PreparedStatement consulta = (PreparedStatement) Conexion.conexion().prepareStatement("SELECT MAX(id) from pieza");
 
         ResultSet result = consulta.executeQuery();
         result.next();
@@ -32,7 +32,7 @@ public class Pieza {
             this.tipoPieza = tipoPieza;
             this.costoPieza = Double.valueOf(costoPieza);
         } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(null, "Error de numero");
+            
         }
 
     }

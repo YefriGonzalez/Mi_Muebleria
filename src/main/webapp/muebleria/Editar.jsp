@@ -4,53 +4,47 @@
     Author     : yefri
 --%>
 
+<%@page import="javax.swing.JOptionPane"%>
 <%@page import="com.mycompany.miMuebleria.Pieza"%>
 <%@page import="com.mycompany.mimuebleria.DB.DBPieza"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<%! Pieza pieza;%>
 
+<%!
+    Pieza pieza = null;
+    DBPieza db = new DBPieza();
+%>
+<%
+    pieza = db.list(Integer.parseInt(request.getParameter("id")));
+%>
+<!DOCTYPE html>
 <html>
-    <head>
-        <link href="css/bootstrap.min.css" rel="stylesheet"> 
+    <head> 
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>EDIT</title>
+        <link href="../css/bootstrap.min.css" rel="stylesheet"/>
+        <title>Editar</title>
     </head>
     <body>
-        <header>
-            Editar
-        </header>
-        <div>
-            <form method="POST" class="form-control" style="width: 500px">
+        <div class="container">
+            <h1>Editar Pieza</h1>
+            <hr>
+            <% if (pieza != null) {
+            %>
+            <form method="POST" action="../EditPiezaServlet" class="form-control" style="width: 500px; height: 400px" >
                 ID:
-                <input type="text" readonly name="idPieza" class="form-control" value="${pieza.id}">
+                <input type="text" readonly="" name="idPieza" class="form-control" value="<%=pieza.getId()%>">
                 Tipo:
-                <input type="text" name="tipoPieza" required class="form-control" value="${pieza.tipoPieza}"/>
-                Costo
-                <input type="text" name="costoPieza"  required step="0.01" class="form-control" value="${pieza.costoPieza}">
+                <input type="text" name="tipoPieza"  class="form-control" value="<%=pieza.getTipoPieza()%>" required/>
+                Costo:
+                <input type="number" name="costoPieza"  step="0.01" class="form-control" value="<%=pieza.getCostoPieza()%>" required><br>
                 <br>
-                <input type="submit">
-                <a href="piezasJsp.jsp"></a>
+                <input type="submit" value="Guardar"  class="btn btn-primary btn-lg">
+                <a href="../Piezas_Servlet" > Regresar</a>
             </form>
+            <%
+                }
+            %>
         </div> 
     </body>
 </html>
 
-<%
-    String tipoPieza;
-    String costoPieza;
-    tipoPieza=request.getParameter("tipoPieza");
-    costoPieza=request.getParameter("costoPieza");
-    DBPieza db = new DBPieza();
-    Integer id = Integer.parseInt(request.getParameter("id"));
-    pieza = db.list(id);
-    if (tipoPieza!=null && costoPieza!=null) {
-            Pieza pieza=new Pieza(tipoPieza,request.getParameter("id"),costoPieza);
-            if (db.edit(pieza)) {
-                    response.sendRedirect("Piezas_Servlet");
-                }
-
-    }
-
-%>
