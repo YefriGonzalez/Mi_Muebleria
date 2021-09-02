@@ -14,21 +14,25 @@
 <%!
     ResultSet result1 = null;
     ResultSet result2 = null;
+    ResultSet result3 = null;
+    ResultSet result4 = null;
     String tipoConsulta;
+    String user;
 %>
 <%
-    tipoConsulta=request.getParameter("tipoConsulta");
+    user=request.getParameter("user");
+    tipoConsulta = request.getParameter("tipoConsulta");
     String peticion = request.getParameter("consulta");
     if (peticion.equals("mayorMenor")) {
         try {
-            PreparedStatement consulta = (PreparedStatement) Conexion.conexion().prepareStatement("SELECT  tipo, COUNT(*) FROM pieza GROUP BY tipo ORDER BY COUNT(*) DESC;");
+            PreparedStatement consulta = (PreparedStatement) Conexion.conexion().prepareStatement("SELECT  tipo,costo, COUNT(*) FROM pieza GROUP BY tipo,costo ORDER BY COUNT(*) DESC");
             result1 = consulta.executeQuery();
         } catch (MiMuebleriaException | SQLException ex) {
 
         }
     } else if (peticion.equals("menorMayor")) {
         try {
-            PreparedStatement consulta = (PreparedStatement) Conexion.conexion().prepareStatement("SELECT  tipo, COUNT(*) FROM pieza GROUP BY tipo ORDER BY COUNT(*) ASC;");
+            PreparedStatement consulta = (PreparedStatement) Conexion.conexion().prepareStatement("SELECT  tipo,costo, COUNT(*) FROM pieza GROUP BY tipo,costo ORDER BY COUNT(*) ASC");
             result2 = consulta.executeQuery();
         } catch (MiMuebleriaException | SQLException ex) {
 
@@ -46,7 +50,7 @@
     <body>
         <h1><%=tipoConsulta%></h1>
     <li id="back" class="btn btn-default btn-lg">
-        <a href="../fabricajsp.jsp"> Regresar</a>
+        <a href="../fabricajsp.jsp?user=<%=user%>"> Regresar</a>
     </li>
     <hr>
     <div  id="table">
@@ -54,35 +58,38 @@
             <thead>
                 <tr>
                     <th class="text-center">Nombre</th>
+                    <th class="text-center">Costo </th>
                     <th class="text-center">Cantidad</th>
                 </tr>
             </thead
             <tbody>
-                <%                    if (request.getParameter("consulta").equals("mayorMenor") && result1!=null) {
+                <%                    if (request.getParameter("consulta").equals("mayorMenor") && result1 != null) {
                         while (result1.next()) {
 
                 %>
                 <tr>
                     <td class="text-center"><%=result1.getString(1)%></td>
                     <td class="text-center"><%=result1.getString(2)%></td>
+                    <td class="text-center"><%=result1.getString(3)%></td>
                 </tr>
                 <%                        }
                     }
                 %>
-                
-                <%                    if (request.getParameter("consulta").equals("menorMayor") && result2!=null) {
+
+                <%                    if (request.getParameter("consulta").equals("menorMayor") && result2 != null) {
                         while (result2.next()) {
 
                 %>
                 <tr>
                     <td class="text-center"><%=result2.getString(1)%></td>
                     <td class="text-center"><%=result2.getString(2)%></td>
+                    <td class="text-center"><%=result2.getString(3)%></td>
                 </tr>
                 <%                        }
                     }
                 %>
-
             </tbody>
         </table>
-    </body>
+    </div>
+</body>
 </html>

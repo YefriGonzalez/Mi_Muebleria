@@ -51,7 +51,7 @@ public class EnsambleMueble {
     public void setFecha(String fecha) {
         this.fecha = convertirFecha(fecha);
     }
-    
+
     public Double getCosto() {
         return costo;
     }
@@ -61,11 +61,20 @@ public class EnsambleMueble {
     }
 
     public static LocalDate convertirFecha(String fecha) {
-        String[] fechaDividida = fecha.split("/");
-        int dia = Integer.valueOf(fechaDividida[0]);
-        int mes = Integer.valueOf(fechaDividida[1]);
-        int anio = Integer.valueOf(fechaDividida[2]);
-        return LocalDate.of(anio, mes, dia);
+        if (fecha.contains("/")) {
+            String[] fechaDividida = fecha.split("/");
+            int dia = Integer.valueOf(fechaDividida[0]);
+            int mes = Integer.valueOf(fechaDividida[1]);
+            int anio = Integer.valueOf(fechaDividida[2]);
+            return LocalDate.of(anio, mes, dia);
+        } else{
+            String[] fechadiv=fecha.split("-");
+            int anio= Integer.valueOf(fechadiv[0]);
+            int mes = Integer.valueOf(fechadiv[1]);
+            int dia = Integer.valueOf(fechadiv[2]);
+            return LocalDate.of(anio, mes, dia);
+         }
+
     }
 
 }

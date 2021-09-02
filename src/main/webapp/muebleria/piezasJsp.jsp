@@ -10,7 +10,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<%!
+String user;
+%>
+
 <%
+    user=request.getParameter("user");
     List<Pieza> list = (ArrayList<Pieza>) request.getAttribute("piezalist");
 %>
 <html>
@@ -24,7 +29,7 @@
     <body>
         <header>Piezas</header>
     <li id="back">
-        <a href="fabricajsp.jsp"> Regresar</a>
+        <a href="fabricajsp.jsp?user=<%=user%>"> Regresar</a>
     </li>
     <div class="crear">
         <li><a href="#">Crear Pieza</a>

@@ -11,11 +11,8 @@ import com.mycompany.miMuebleria.archivo.ERROR;
 import com.mycompany.miMuebleria.archivo.LectorArchivoTexto;
 import com.mycompany.mimuebleria.DB.DBPieza;
 import java.io.IOException;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -40,11 +37,12 @@ public class Piezas_Servlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        String user=request.getParameter("user");
         DBPieza dbPieza=new DBPieza();
         List<Pieza> list=new ArrayList<>();
         list= dbPieza.listar();
         request.setAttribute("piezalist", list);
-        request.getRequestDispatcher("muebleria/piezasJsp.jsp").forward(request, response);
+        request.getRequestDispatcher("muebleria/piezasJsp.jsp?user="+user).forward(request, response);
     }
     
     /**

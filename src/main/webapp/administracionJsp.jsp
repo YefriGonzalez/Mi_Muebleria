@@ -21,8 +21,12 @@
                 <li><a href="CerrarSesion">Cerrar Sesion</a></li>
             </ul>
         </div>
-        <div>
-           
+       
+         <div class="archivoCarga">
+            <form class="archivo" method="POST" action="CargaArchivo_Servlet" enctype="multipart/form-data">
+                <input type="file" name="fileCarga" required>
+                <input type="submit" value="Enviar Archivo">
+            </form>
         </div>
     </body>
 </html>

@@ -10,6 +10,7 @@
 /home/yefri/NetBeansProjects/MI_Muebleria/src/main/java/com/mycompany/mimuebleria/DB/DBEnsamblePieza.java
 /home/yefri/NetBeansProjects/MI_Muebleria/src/main/java/com/mycompany/mimuebleria/DB/DBPieza.java
 /home/yefri/NetBeansProjects/MI_Muebleria/src/main/java/com/mycompany/mimuebleria/DB/DBUsuario.java
+/home/yefri/NetBeansProjects/MI_Muebleria/src/main/java/com/mycompany/miMuebleria/servlet/EnsambleServlet.java
 /home/yefri/NetBeansProjects/MI_Muebleria/src/main/java/com/mycompany/miMuebleria/servlet/CerrarSesion.java
 /home/yefri/NetBeansProjects/MI_Muebleria/src/main/java/com/mycompany/miMuebleria/archivo/ERROR.java
 /home/yefri/NetBeansProjects/MI_Muebleria/src/main/java/com/mycompany/mimuebleria/DB/DBEnsambleMueble.java

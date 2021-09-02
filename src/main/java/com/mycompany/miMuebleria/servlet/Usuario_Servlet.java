@@ -41,7 +41,7 @@ public class Usuario_Servlet extends HttpServlet {
             if (usuario != null) {
                 int num = ValidacionUsuario.validar(usuario);
                 if (num == 1) {
-                    response.sendRedirect("fabricajsp.jsp");
+                    response.sendRedirect("fabricajsp.jsp?user="+username);
                 } else if (num == 2) {
                     response.sendRedirect("ventasJsp.jsp");
                 } else if (num == 3) {
