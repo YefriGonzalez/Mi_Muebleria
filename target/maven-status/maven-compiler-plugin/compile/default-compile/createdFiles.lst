@@ -20,6 +20,7 @@ com/mycompany/miMuebleria/Ensamble_Pieza.class
 com/mycompany/miMuebleria/Usuario.class
 com/mycompany/miMuebleria/servlet/CerrarSesion.class
 com/mycompany/mimuebleria/DB/DBMueble.class
+com/mycompany/miMuebleria/servlet/EnsambleServlet.class
 com/mycompany/miMuebleria/servlet/EditPiezaServlet.class
 com/mycompany/mimuebleria/DB/DBEnsambleMueble.class
 com/mycompany/mimuebleria/DB/DBUsuario.class

@@ -9,6 +9,8 @@ import com.mycompany.miMuebleria.MiMuebleriaException;
 import com.mycompany.miMuebleria.Usuario;
 import com.mycompany.mimuebleria.DB.DBUsuario;
 import java.io.IOException;
+import java.io.PrintWriter;
+import static java.lang.System.out;
 import java.sql.SQLException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -41,19 +43,19 @@ public class Usuario_Servlet extends HttpServlet {
             if (usuario != null) {
                 int num = ValidacionUsuario.validar(usuario);
                 if (num == 1) {
-                    response.sendRedirect("fabricajsp.jsp?user="+username);
+                    response.sendRedirect("fabricajsp.jsp?user=" + username);
                 } else if (num == 2) {
                     response.sendRedirect("ventasJsp.jsp");
                 } else if (num == 3) {
                     response.sendRedirect("administracionJsp.jsp");
                 } else {
-                    response.sendRedirect("index.jsp");
+                    response.sendRedirect("index.jsp?inicioSesion=false");
                 }
             } else {
-                response.sendRedirect("index.jsp");
+                response.sendRedirect("index.jsp?inicioSesion=false");
             }
         } catch (MiMuebleriaException | SQLException ex) {
-            response.sendRedirect("index.jsp");
+            response.sendRedirect("index.jsp?inicioSesion=false");
         }
     }
 }

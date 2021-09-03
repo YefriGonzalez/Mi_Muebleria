@@ -26,7 +26,6 @@ public class DBUsuario {
         PreparedStatement consulta = (PreparedStatement) (Conexion.conexion()).prepareStatement("SELECT *FROM usuario WHERE usuario=? AND password=? COLLATE utf8mb4_bin");
         consulta.setString(1, username);
         consulta.setString(2, password);
-
         ResultSet result = consulta.executeQuery();
         if (result.next()) {
             usuario = new Usuario(username, password, result.getString(3), result.getString(4));

@@ -11,11 +11,14 @@
 <!DOCTYPE html>
 <%!
     ResultSet result = null;
+    ResultSet result2=null;
+    ResultSet result3=null;
+    ResultSet result4=null;
+    ResultSet result5=null;
 %>
 <%
     PreparedStatement consulta = (PreparedStatement) Conexion.conexion().prepareStatement("SELECT *FROM ensamble_mueble");
     result = consulta.executeQuery();
-
 %>
 <html>
     <head>
@@ -38,7 +41,7 @@
                 </tr>
             </thead>
             <tbody>
-                <%                    if (result != null) {
+                <%                    if (result != null ) {
                         while (result.next()) {
 
                 %>

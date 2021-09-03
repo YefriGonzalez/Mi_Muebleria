@@ -5,10 +5,7 @@
  */
 package com.mycompany.miMuebleria.servlet;
 
-import com.mycompany.miMuebleria.MiMuebleriaException;
 import com.mycompany.miMuebleria.Pieza;
-import com.mycompany.miMuebleria.archivo.ERROR;
-import com.mycompany.miMuebleria.archivo.LectorArchivoTexto;
 import com.mycompany.mimuebleria.DB.DBPieza;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -25,7 +22,6 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(name = "Piezas_Servlet", urlPatterns = {"/Piezas_Servlet"})
 public class Piezas_Servlet extends HttpServlet {
-    private ArrayList<ERROR> errores=new ArrayList<>();
     /**
      * Handles the HTTP <code>GET</code> method.
      *
@@ -45,18 +41,5 @@ public class Piezas_Servlet extends HttpServlet {
         request.getRequestDispatcher("muebleria/piezasJsp.jsp?user="+user).forward(request, response);
     }
     
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        
-       
-    }
+
 }
