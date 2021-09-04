@@ -48,7 +48,7 @@ public class EnsambleServlet extends HttpServlet {
                 dbpieza.agregarEnsamblePieza(tipoMueblePieza, tipoPieza, cantPieza);
                 response.sendRedirect("fabricajsp.jsp?user=" + user);
             } catch (SQLException | MiMuebleriaException ex) {
-                response.sendRedirect("fabricajsp.jsp?user=" + user);
+                response.sendRedirect("muebleria/ErrorFabrica.jsp?user"+user+"&error=Error al crear ensable de piezas");
             }
         } else if (tipoEnsamble.equals("mueble") && tipoMuebleEnsamble != null && user != null && fecha!= null) {
             JOptionPane.showMessageDialog(null,fecha);
@@ -57,7 +57,7 @@ public class EnsambleServlet extends HttpServlet {
                 dbmueble.agregarEnsambleMueble(tipoMuebleEnsamble, user, fecha);
                 response.sendRedirect("fabricajsp.jsp?user=" + user);
             } catch (SQLException | MiMuebleriaException ex) {
-                response.sendRedirect("fabricajsp.jsp?user=" + user);
+                response.sendRedirect("muebleria/ErrorFabrica.jsp?user"+user+"&error=Error al crear ensable de mueble");
             }
         }
 

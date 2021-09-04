@@ -33,16 +33,17 @@ public class DeleteServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        String user = request.getParameter("user");
         String id = request.getParameter("id");
         DBPieza db = new DBPieza();
         if (id != null) {
             if (db.eliminar(Integer.valueOf(id))) {
-                response.sendRedirect("Piezas_Servlet");
+                response.sendRedirect("Piezas_Servlet?user=" + user);
             } else {
-                //manejar error
+                response.sendRedirect("muebleria/ErrorFabrica.jsp?user=" + user + "&error=Error a eliminar pieza");
             }
         } else {
-            //manejar error
+            response.sendRedirect("muebleria/ErrorFabrica.jsp?user=" + user + "&error=Error a eliminar pieza");
         }
 
     }

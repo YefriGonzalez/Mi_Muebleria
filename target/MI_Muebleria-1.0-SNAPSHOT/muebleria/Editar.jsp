@@ -13,8 +13,10 @@
 <%!
     Pieza pieza = null;
     DBPieza db = new DBPieza();
+    String user;
 %>
 <%
+    user=request.getParameter("user");
     pieza = db.list(Integer.parseInt(request.getParameter("id")));
 %>
 <!DOCTYPE html>
@@ -30,7 +32,7 @@
             <hr>
             <% if (pieza != null) {
             %>
-            <form method="POST" action="../EditPiezaServlet" class="form-control" style="width: 500px; height: 400px" >
+            <form method="POST" action="../EditPiezaServlet?user=<%=user%>" class="form-control" style="width: 500px; height: 400px" >
                 ID:
                 <input type="text" readonly="" name="idPieza" class="form-control" value="<%=pieza.getId()%>">
                 Tipo:
@@ -39,7 +41,7 @@
                 <input type="number" name="costoPieza"  step="0.01" class="form-control" value="<%=pieza.getCostoPieza()%>" required><br>
                 <br>
                 <input type="submit" value="Guardar"  class="btn btn-primary btn-lg">
-                <a href="../Piezas_Servlet" > Regresar</a>
+                <a href="../Piezas_Servlet?user=<%=user%>" > Regresar</a>
             </form>
             <%
                 }

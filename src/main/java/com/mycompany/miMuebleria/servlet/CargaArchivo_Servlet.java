@@ -31,19 +31,6 @@ import javax.swing.JOptionPane;
 @WebServlet(name = "CargaArchivo_Servlet", urlPatterns = {"/CargaArchivo_Servlet"})
 public class CargaArchivo_Servlet extends HttpServlet {
 
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-
-    }
 
     /**
      * Handles the HTTP <code>POST</code> method.
@@ -73,13 +60,7 @@ public class CargaArchivo_Servlet extends HttpServlet {
             lectorArchivo.leerArchivo3(inputStream3);
             lectorArchivo.leerArchivo4(inputStream4);
             response.sendRedirect("fabricajsp.jsp");
-            out.println("<script type=\"text/javascript\">");
-            out.println("alert('Archivo cargado con exito');");
-            out.println("</script>");
         } catch (MiMuebleriaException | IOException | SQLException | ServletException e) {
-            out.println("<script type=\"text/javascript\">");
-            out.println("alert('Error al cargar archivo');");
-            out.println("</script>");
             response.sendRedirect("fabricajsp.jsp");
         }
     }

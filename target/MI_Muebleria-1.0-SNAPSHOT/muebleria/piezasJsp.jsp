@@ -33,7 +33,7 @@ String user;
     </li>
     <div class="crear">
         <li><a href="#">Crear Pieza</a>
-            <form class="form" method="POST" action="ControladorPiezaServlet">
+            <form class="form" method="POST" action="ControladorPiezaServlet?user=<%=user%>">
                 <input type="text" name="nombreCrearPieza" placeholder="Nombre de la pieza" required>
                 <hr>
                 <input type="" name="costoCrearPieza" step="0.01" placeholder="Costo de la pieza" required>
@@ -60,8 +60,8 @@ String user;
                         <td class="text-center">${pieza.id}</td>
                         <td class="text-center">${pieza.tipoPieza}</td>
                         <td class="text-center">${pieza.costoPieza}</td>
-                        <td class="text-center"><a class="btn btn-warnign btn-small" href="muebleria/Editar.jsp?id=${pieza.id}">Editar</a>
-                            <a class="btn btn-danger btn-small" method="POST" href="DeleteServlet?id=${pieza.id}" >Eliminar</a>
+                        <td class="text-center"><a class="btn btn-warnign btn-small" href="muebleria/Editar.jsp?user=<%=user%>&id=${pieza.id}">Editar</a>
+                            <a class="btn btn-danger btn-small" method="POST" href="DeleteServlet?user=<%=user%>&id=${pieza.id}" >Eliminar</a>
                         </td>
                     </tr>
                 </c:forEach>

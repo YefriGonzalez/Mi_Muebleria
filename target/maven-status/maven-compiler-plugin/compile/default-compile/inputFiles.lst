@@ -22,5 +22,9 @@
 /home/yefri/NetBeansProjects/MI_Muebleria/src/main/java/com/mycompany/miMuebleria/MiMuebleriaException.java
 /home/yefri/NetBeansProjects/MI_Muebleria/src/main/java/com/mycompany/miMuebleria/servlet/DeleteServlet.java
 /home/yefri/NetBeansProjects/MI_Muebleria/src/main/java/com/mycompany/miMuebleria/servlet/Usuario_Servlet.java
+/home/yefri/NetBeansProjects/MI_Muebleria/src/main/java/com/mycompany/miMuebleria/Venta.java
 /home/yefri/NetBeansProjects/MI_Muebleria/src/main/java/com/mycompany/miMuebleria/servlet/Piezas_Servlet.java
+/home/yefri/NetBeansProjects/MI_Muebleria/src/main/java/com/mycompany/miMuebleria/servlet/DevolucionServlet.java
 /home/yefri/NetBeansProjects/MI_Muebleria/src/main/java/com/mycompany/miMuebleria/archivo/LectorArchivoTexto.java
+/home/yefri/NetBeansProjects/MI_Muebleria/src/main/java/com/mycompany/miMuebleria/servlet/InsertClienteServlet.java
+/home/yefri/NetBeansProjects/MI_Muebleria/src/main/java/com/mycompany/miMuebleria/servlet/VentaServlet.java

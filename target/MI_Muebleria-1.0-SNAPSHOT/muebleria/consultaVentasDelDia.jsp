@@ -45,9 +45,9 @@
                         while (result2.next()) {
                 %>
                 <tr>
-                    <td class="text-center">result2.getString(1)</td>
-                    <td class="text-center">result2.getString(2)</td>
-                    <td class="text-center">result2.getString(3)</td>
+                    <td class="text-center"><%=result2.getString(1)%></td>
+                    <td class="text-center"><%=result2.getString(2)%></td>
+                    <td class="text-center"><%=result2.getString(3)%></td>
                 </tr>
                 <%
                         }

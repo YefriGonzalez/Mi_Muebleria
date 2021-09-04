@@ -1,0 +1,69 @@
+body{
+    background: url(../Imagenes/admin1.jpg);
+    background-size: cover;
+    margin: auto;
+    text-align: center;
+}
+header{
+    color: white;
+    font-size: 70px;
+    font-weight: bold;
+}
+.logout{
+    width: 100%;
+}
+.logout ul{
+    margin-right: 10px;
+    list-style: none;
+}
+.cerrarSesion>li{
+    text-decoration: none;
+    text-align: right;
+}
+.cerrarSesion>li>a{
+    padding: 15px 20px;
+    color: #1b4f72;
+    font-family: sans-serif;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: bold;
+    border: 2px solid #1b4f72;
+    border-radius: 5%;
+    background: white;
+}
+
+.archivoCarga{
+    width: 100%;
+    height: 175px;
+    margin-top: 100px;
+}
+.archivoCarga>form{
+    height: 80px;   
+    margin: 0;
+    margin-top: 30%;
+    width: 100%;
+    margin-bottom: 0;
+}
+.archivo input[type="submit"]{
+    height: 50px;
+    width: 250px;
+    margin-left: 20px;
+    background: #1b4f72;
+    color: white;
+    font-family: sans-serif;
+    cursor: pointer;
+    font-size: 20px; 
+}
+.archivo input[type="file"]{
+    height: 30px;
+    width: 450px;
+    font-size: 20px;    
+    color: white;
+    background: #1b4f72;
+    font-weight: bold;
+}
+
+.archivo input[type="submit"]:hover{
+    background: #3498db;
+}
+

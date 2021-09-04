@@ -1,0 +1,98 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package com.mycompany.miMuebleria.servlet;
+
+import com.mycompany.miMuebleria.MiMuebleriaException;
+import com.mycompany.miMuebleria.Venta;
+import com.mycompany.mimuebleria.DB.Conexion;
+import java.io.IOException;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.time.LocalDate;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.swing.JOptionPane;
+
+/**
+ *
+ * @author yefri
+ */
+@WebServlet(name = "VentasFormServlet", urlPatterns = {"/VentaServlet"})
+public class VentaServlet extends HttpServlet {
+
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+    /**
+     * Handles the HTTP <code>POST</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        String tipoMueble = request.getParameter("tipoMuebleVenta");
+        String nitVenta = request.getParameter("nitClienteVenta");
+        try {
+            if (tipoMueble != null && nitVenta != null && !nitVenta.contains("-")) {
+                if (nitExistente(nitVenta)) {
+                    if (muebleExistente(tipoMueble)) {
+                        Venta venta = new Venta(tipoMueble, nitVenta);
+                        PreparedStatement insertVenta = (PreparedStatement) Conexion.conexion().prepareStatement("INSERT INTO venta(mueble,nitVenta,fecha) VALUES(?,?,?)");
+                        insertVenta.setString(1, venta.getMueble());
+                        insertVenta.setString(2, venta.getNitVenta());
+                        insertVenta.setDate(3, java.sql.Date.valueOf(LocalDate.now()));
+                        insertVenta.execute();
+                        response.sendRedirect("ventasJsp.jsp");
+                    } else {
+                        response.sendRedirect("muebleria/ErroresVentas.jsp?error=Mueble No existe");
+                    }
+                } else {
+                    response.sendRedirect("muebleria/ErroresVentas.jsp?error=Nit no existente");
+                }
+
+            } else {
+                response.sendRedirect("muebleria/ErroresVentas.jsp?error=Nit contiene -");
+            }
+        } catch (SQLException | MiMuebleriaException ex) {
+            response.sendRedirect("muebleria/ErroresVentas.jsp?error=Erro al procesar Venta");
+        }
+    }
+
+    public boolean nitExistente(String nit) {
+        boolean nitExist = false;
+        try {
+            PreparedStatement consulta = (PreparedStatement) Conexion.conexion().prepareStatement("SELECT *FROM cliente WHERE nit='" + nit + "'");
+            ResultSet set = consulta.executeQuery();
+            nitExist = set.next();
+        } catch (MiMuebleriaException | SQLException ex) {
+            Logger.getLogger(VentaServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return nitExist;
+    }
+
+    public boolean muebleExistente(String mueble) {
+        boolean muebleExist = false;
+        try {
+            PreparedStatement consulta = (PreparedStatement) Conexion.conexion().prepareStatement("SELECT  mueble FROM ensamble_mueble a WHERE NOT EXISTS (SELECT NULL FROM venta b WHERE a.mueble=b.mueble)");
+            ResultSet result = consulta.executeQuery();
+            while (result.next()) {
+                if (result.getString(1).equals(mueble)) {
+                    muebleExist = true;
+                }
+            }
+        } catch (MiMuebleriaException | SQLException e) {
+        }
+        return muebleExist;
+    }
+}

@@ -34,20 +34,19 @@ public class EditPiezaServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+        String user=request.getParameter("user");
         String tipoPieza=request.getParameter("tipoPieza");
         String id=request.getParameter("idPieza");
         String costo=request.getParameter("costoPieza");
         if (costo!=null && id!=null && tipoPieza!=null) {
             DBPieza db=new DBPieza();
             if (db.edit(tipoPieza, id, costo)) {
-                response.sendRedirect("Piezas_Servlet");
+                response.sendRedirect("Piezas_Servlet?user="+user);
             } else {
-                response.sendRedirect("Piezas_Servlet");
-                // obtener error 
+                response.sendRedirect("muebleria/ErrorFabrica.jsp?error=Error al editar&user="+user);
             }
         } else {
-            
+            response.sendRedirect("muebleria/ErrorFabrica.jsp?error=Error al editar&user="+user);
         }
         
     }

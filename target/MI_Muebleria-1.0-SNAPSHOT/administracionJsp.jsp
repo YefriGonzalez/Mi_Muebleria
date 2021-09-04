@@ -9,12 +9,12 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link href="css/administracioncss.css" rel="stylesheet"/>
+        <link href="css1/administracioncss.css" rel="stylesheet"/>
         <title>Area de Administracion|Mi Muebleria</title>
     </head>
     <body>
         <header>
-            Area de Administracion
+            Area Financiera y Administracion
         </header>
         <div class="logout">
              <ul class="cerrarSesion">

@@ -10,7 +10,7 @@
 <%@page import="java.sql.ResultSet"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<%!    
+<%!
     String tipoConsulta;
     String nitCliente;
     String fechaInicial;
@@ -45,12 +45,12 @@
                 if (!fechaInicial.isEmpty() && !fechaFinal.isEmpty() && !nitCliente.contains("-")) {
                     PreparedStatement consulta1 = (PreparedStatement) Conexion.conexion().prepareStatement("SELECT *FROM venta WHERE nitVenta='" + nitCliente + "' AND fecha>='" + fechaInicial + "' AND fecha<='" + fechaFinal + "';");
                     result = consulta1.executeQuery();
-                    
+
                 } else if (!nitCliente.contains("-") && fechaFinal.isEmpty() && fechaInicial.isEmpty()) {
                     PreparedStatement consulta1 = (PreparedStatement) Conexion.conexion().prepareStatement("SELECT *FROM venta WHERE nitVenta='" + nitCliente + "';");
                     result = consulta1.executeQuery();
                 } else {
-                    response.sendRedirect("../ventasJsp.jsp");
+                    response.sendRedirect("ErroresVentas.jsp?error=Nit incorrecto");
                 }
         %>
         <div>
@@ -87,17 +87,17 @@
         <%
             }
         %>
-        <%    
+        <%
             if (tipoConsulta.equals("devolucionIntervalo")) {
                 if (!fechaIniDevolucion.isEmpty() && !fechaFinDevolucion.isEmpty() && !nitDev.contains("-")) {
                     PreparedStatement consulta2 = (PreparedStatement) Conexion.conexion().prepareStatement("SELECT *FROM devolucion WHERE nitVenta='" + nitDev + "' AND fecha>='" + fechaIniDevolucion + "' AND fecha<='" + fechaFinDevolucion + "';");
                     result2 = consulta2.executeQuery();
-                    
+
                 } else if (!nitDev.contains("-") && fechaFinDevolucion.isEmpty() && fechaIniDevolucion.isEmpty()) {
                     PreparedStatement consulta2 = (PreparedStatement) Conexion.conexion().prepareStatement("SELECT *FROM devolucion WHERE nitVenta='" + nitDev + "';");
                     result2 = consulta2.executeQuery();
                 } else {
-                   response.sendRedirect("../ventasJsp.jsp");
+                    response.sendRedirect("ErroresVentas.jsp?error=Nit incorrecto");
                 }
         %>
         <div>
@@ -112,6 +112,7 @@
                     <tr>
                         <th class="text-center">Mueble</th>
                         <th class="text-center">NIT</th>
+                        <th class="text-center">Fecha de devolucion</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -119,10 +120,11 @@
                             while (result2.next()) {
                     %>
                     <tr>
-                        <td class="text-center">result2.getString(1)</td>
-                        <td class="text-center">result2.getString(2)</td>
+                        <td class="text-center"><%=result2.getString(1)%></td>
+                        <td class="text-center"><%=result2.getString(2)%></td>
+                        <td class="text-center"><%=result2.getString(3)%></td>
                     </tr>
-                    <%            
+                    <%
                             }
                         }
                     %>
@@ -132,10 +134,15 @@
         <%
             }
         %>
-        <%    
-            if (tipoConsulta.equals("facturaCliete") && !nit.contains("-")) {
-                PreparedStatement consulta3 = (PreparedStatement) Conexion.conexion().prepareStatement("SELECT *FROM cliente WHERE nit='"+ nit +"'");
-                result3 = consulta3.executeQuery();
+        <%
+            if (tipoConsulta.equals("facturaCliete")) {
+                if (!nit.contains("-")) {
+                    PreparedStatement consulta3 = (PreparedStatement) Conexion.conexion().prepareStatement("SELECT *FROM cliente WHERE nit='" + nit + "'");
+                    result3 = consulta3.executeQuery();
+                } else {
+                    response.sendRedirect("ErroresVentas.jsp?error=Nit incorrecto");
+                }
+
         %>
         <div>
             <h1>Consulta de faactura de un cliente</h1>
@@ -153,8 +160,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <%                
-                        if (result3 != null) {
+                    <%                        if (result3 != null) {
                             while (result3.next()) {
                     %>
                     <tr>

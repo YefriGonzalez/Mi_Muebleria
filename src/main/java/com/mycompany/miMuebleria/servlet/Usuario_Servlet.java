@@ -49,13 +49,13 @@ public class Usuario_Servlet extends HttpServlet {
                 } else if (num == 3) {
                     response.sendRedirect("administracionJsp.jsp");
                 } else {
-                    response.sendRedirect("index.jsp?inicioSesion=false");
+                    response.sendRedirect("muebleria/ErrorLogin.jsp?error=Username o Password Incorrectos");
                 }
             } else {
-                response.sendRedirect("index.jsp?inicioSesion=false");
+                response.sendRedirect("muebleria/ErrorLogin.jsp?error=Username o Password Incorrectos");
             }
         } catch (MiMuebleriaException | SQLException ex) {
-            response.sendRedirect("index.jsp?inicioSesion=false");
+            response.sendRedirect("muebleria/ErrorLogin.jsp?erro=Username o Password Incorrectos");
         }
     }
 }

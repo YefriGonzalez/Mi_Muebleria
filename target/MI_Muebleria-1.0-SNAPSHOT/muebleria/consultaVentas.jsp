@@ -17,7 +17,7 @@
     ResultSet result5=null;
 %>
 <%
-    PreparedStatement consulta = (PreparedStatement) Conexion.conexion().prepareStatement("SELECT *FROM ensamble_mueble");
+    PreparedStatement consulta = (PreparedStatement) Conexion.conexion().prepareStatement("SELECT  *FROM ensamble_mueble a WHERE NOT EXISTS (SELECT NULL FROM venta b WHERE a.mueble=b.mueble)");
     result = consulta.executeQuery();
 %>
 <html>

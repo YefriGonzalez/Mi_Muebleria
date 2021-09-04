@@ -41,6 +41,7 @@ public class ControladorPiezaServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String tipoPieza = request.getParameter("nombreCrearPieza");
+        String user=request.getParameter("user");
         try {
             String costo = request.getParameter("costoCrearPieza");
             String id = String.valueOf(LectorArchivoTexto.getCantidadPieza());
