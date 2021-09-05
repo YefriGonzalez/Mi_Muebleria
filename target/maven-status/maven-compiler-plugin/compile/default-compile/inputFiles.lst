@@ -1,5 +1,7 @@
+/home/yefri/NetBeansProjects/MI_Muebleria/src/main/java/com/mycompany/miMuebleria/servlet/CancelarUsuarioServlet.java
 /home/yefri/NetBeansProjects/MI_Muebleria/src/main/java/com/mycompany/miMuebleria/Cliente.java
 /home/yefri/NetBeansProjects/MI_Muebleria/src/main/java/com/mycompany/miMuebleria/interfaces/CRUDPIEZA.java
+/home/yefri/NetBeansProjects/MI_Muebleria/src/main/java/com/mycompany/miMuebleria/servlet/CrearUsuarioServlet.java
 /home/yefri/NetBeansProjects/MI_Muebleria/src/main/java/com/mycompany/miMuebleria/Pieza.java
 /home/yefri/NetBeansProjects/MI_Muebleria/src/main/java/com/mycompany/miMuebleria/EnsambleMueble.java
 /home/yefri/NetBeansProjects/MI_Muebleria/src/main/java/com/mycompany/miMuebleria/servlet/ValidacionUsuario.java
@@ -25,6 +27,7 @@
 /home/yefri/NetBeansProjects/MI_Muebleria/src/main/java/com/mycompany/miMuebleria/Venta.java
 /home/yefri/NetBeansProjects/MI_Muebleria/src/main/java/com/mycompany/miMuebleria/servlet/Piezas_Servlet.java
 /home/yefri/NetBeansProjects/MI_Muebleria/src/main/java/com/mycompany/miMuebleria/servlet/DevolucionServlet.java
+/home/yefri/NetBeansProjects/MI_Muebleria/src/main/java/com/mycompany/miMuebleria/servlet/CrearMuebleServlet.java
 /home/yefri/NetBeansProjects/MI_Muebleria/src/main/java/com/mycompany/miMuebleria/archivo/LectorArchivoTexto.java
 /home/yefri/NetBeansProjects/MI_Muebleria/src/main/java/com/mycompany/miMuebleria/servlet/InsertClienteServlet.java
 /home/yefri/NetBeansProjects/MI_Muebleria/src/main/java/com/mycompany/miMuebleria/servlet/VentaServlet.java

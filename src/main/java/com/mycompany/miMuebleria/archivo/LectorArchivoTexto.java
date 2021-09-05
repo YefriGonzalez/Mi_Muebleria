@@ -39,13 +39,14 @@ public class LectorArchivoTexto {
     private ArrayList<Pieza> piezas = new ArrayList<>();
     private ArrayList<Mueble> muebles = new ArrayList<>();
     private ArrayList<Usuario> usuarios = new ArrayList<>();
-    private ArrayList<ERROR> errores=new ArrayList<>();
+    private ArrayList<ERROR> errores = new ArrayList<>();
     private static int cantidadPieza;
-    public LectorArchivoTexto() throws MiMuebleriaException, SQLException{
-        PreparedStatement consulta=(PreparedStatement)Conexion.conexion().prepareStatement("SELECT MAX(id) from pieza");
-        ResultSet result=consulta.executeQuery();
+
+    public LectorArchivoTexto() throws MiMuebleriaException, SQLException {
+        PreparedStatement consulta = (PreparedStatement) Conexion.conexion().prepareStatement("SELECT MAX(id) from pieza");
+        ResultSet result = consulta.executeQuery();
         result.next();
-        cantidadPieza=result.getInt(1);
+        cantidadPieza = result.getInt(1);
     }
 
     public void leerArchivo(InputStream inputStream) throws FileNotFoundException, IOException, SQLException, MiMuebleriaException {
@@ -96,7 +97,7 @@ public class LectorArchivoTexto {
         }
     }
 
-    public void separarCamposUsuario(String linea) throws MiMuebleriaException {
+    public void separarCamposUsuario(String linea) throws MiMuebleriaException, SQLException {
         if (linea.startsWith(INICIO_USUARIO)) {
             String lineaDeCampos = linea.substring(INICIO_USUARIO.length(), linea.length() - 1);
             String[] campos = lineaDeCampos.split(",");
@@ -117,13 +118,17 @@ public class LectorArchivoTexto {
     }
 
     public void separarCamposMueble(String linea) {
-        if (linea.startsWith(INICIO_MUEBLE)) {
-            String lineaDeCampos = linea.substring(INICIO_MUEBLE.length(), linea.length() - 1);
-            String[] campos = lineaDeCampos.split(",");
-            Mueble mueble = new Mueble(campos[0].replaceAll("\"", ""), campos[1].replaceAll("\"", ""));
-            muebles.add(mueble);
-            DBMueble.agregarMueble(mueble);
+        try {
+            if (linea.startsWith(INICIO_MUEBLE)) {
+                String lineaDeCampos = linea.substring(INICIO_MUEBLE.length(), linea.length() - 1);
+                String[] campos = lineaDeCampos.split(",");
+                Mueble mueble = new Mueble(campos[0].replaceAll("\"", ""), campos[1].replaceAll("\"", ""));
+                muebles.add(mueble);
+                DBMueble.agregarMueble(mueble);
+            }
+        } catch (Exception e) {
         }
+
     }
 
     public void separarCamposEnsamblePiezas(String linea) throws SQLException, MiMuebleriaException {
@@ -140,7 +145,7 @@ public class LectorArchivoTexto {
             String lineaDeCampos = linea.substring(INICIO_ENSAMBLE_MUEBLE.length(), linea.length() - 1);
             String[] campos = lineaDeCampos.split(",");
             DBEnsambleMueble dbEnsambleMueble = new DBEnsambleMueble();
-            dbEnsambleMueble.agregarEnsambleMueble(campos[0].replaceAll("\"", ""), campos[1].replaceAll("\"", ""), campos[2].replaceAll("\"",""));
+            dbEnsambleMueble.agregarEnsambleMueble(campos[0].replaceAll("\"", ""), campos[1].replaceAll("\"", ""), campos[2].replaceAll("\"", ""));
         }
     }
 
@@ -148,24 +153,24 @@ public class LectorArchivoTexto {
         if (linea.startsWith(INICIO_CLIENTE)) {
             String lineaDeCampos = linea.substring(INICIO_CLIENTE.length(), linea.length() - 1);
             String[] campos = lineaDeCampos.split(",");
-            if (campos.length>3) {
+            if (campos.length > 3) {
                 if (!campos[1].contains("-")) {
                     Cliente cliente = new Cliente(campos[0].replaceAll("\"", ""), campos[1].replaceAll("\"", ""), campos[2].replaceAll("\"", ""), campos[3].replaceAll("\"", ""), campos[4].replaceAll("\"", ""));
                     clientes.add(cliente);
                     DBCliente.AgregarCliente(cliente);
-                }else {
-                    errores.add(new ERROR("FORMATO: "+linea,"CONTIENE - "));
+                } else {
+                    errores.add(new ERROR("FORMATO: " + linea, "CONTIENE - "));
                 }
-            } else if(campos.length<=3){
+            } else if (campos.length <= 3) {
                 if (!campos[1].contains("-")) {
                     Cliente cliente = new Cliente(campos[0].replaceAll("\"", ""), campos[1].replaceAll("\"", ""), campos[2].replaceAll("\"", ""));
                     clientes.add(cliente);
                     DBCliente.AgregarCliente(cliente);
                 } else {
-                    errores.add(new ERROR("FORMATO: " +linea,"CONTIENE - "));
+                    errores.add(new ERROR("FORMATO: " + linea, "CONTIENE - "));
                 }
-            }else {
-                errores.add(new ERROR("FORMATO: " +linea,"No cumple con los datos necesarios"));
+            } else {
+                errores.add(new ERROR("FORMATO: " + linea, "No cumple con los datos necesarios"));
             }
         }
     }
