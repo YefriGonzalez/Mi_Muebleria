@@ -17,8 +17,8 @@ import java.sql.SQLException;
  */
 public class Conexion {
 
-    private static final String USER = "root2";
-    private static final String PASSWORD = "Root2021.";
+    private static final String USER = "userMuebleria";
+    private static final String PASSWORD = "MiMuebleria123.";
     private static final String URL_MYSQL = "jdbc:mysql://localhost:3306/Mi_Muebleria"; 
     public static Connection conexion()throws MiMuebleriaException {
         Connection connection = null;

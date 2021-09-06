@@ -8,6 +8,7 @@ package com.mycompany.miMuebleria.Reportes;
 import com.sun.imageio.plugins.common.InputStreamAdapter;
 import java.io.BufferedInputStream;
 import java.io.FileInputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -38,19 +39,17 @@ public class DownloadServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        Part filepart=request.getPart("path");
-        String archivo=filepart.getHeader("Content-type");
-        InputStream fileStream=filepart.getInputStream();
-        try (BufferedInputStream in = new BufferedInputStream(fileStream)) {
-            response.setContentType("text/csv");
-            response.setHeader("Content-diposition", "attachament: filename=ReporteVentas.csv");
+        String path=request.getParameter("path");
+        try (BufferedInputStream in=new BufferedInputStream(new FileInputStream(path))) {
             int data = in.read();
-            while (data != -1) {
+            response.setContentType("text/csv");    
+            response.setHeader("Content-Diposition", "attachment; filename="+path);
+            while (data > -1) {
                 response.getOutputStream().write(data);
                 data = in.read();
             }
         } catch (Exception e) {
+            response.sendRedirect("muebleria/ErroAdmin.jsp?error=Error al descargar archivo");
         }
     }
-
 }

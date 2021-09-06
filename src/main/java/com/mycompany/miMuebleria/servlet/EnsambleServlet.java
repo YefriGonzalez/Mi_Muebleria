@@ -42,23 +42,26 @@ public class EnsambleServlet extends HttpServlet {
         String tipoPieza = request.getParameter("tipoPieza");
         String cantPieza = request.getParameter("cantPiezas");
         String fecha = request.getParameter("fechaEnsamble");
-        if (tipoEnsamble.equals("piezas") && tipoMueblePieza!=null && tipoPieza != null && cantPieza != null) {
+        if (tipoEnsamble.equals("piezas") && tipoMueblePieza != null && tipoPieza != null && cantPieza != null) {
             try {
                 DBEnsamblePieza dbpieza = new DBEnsamblePieza();
                 dbpieza.agregarEnsamblePieza(tipoMueblePieza, tipoPieza, cantPieza);
                 response.sendRedirect("fabricajsp.jsp?user=" + user);
             } catch (SQLException | MiMuebleriaException ex) {
-                response.sendRedirect("muebleria/ErrorFabrica.jsp?user"+user+"&error=Error al crear ensable de piezas");
+                response.sendRedirect("muebleria/ErrorFabrica.jsp?user" + user + "&error=Error al crear ensable de piezas");
             }
-        } else if (tipoEnsamble.equals("mueble") && tipoMuebleEnsamble != null && user != null && fecha!= null) {
-            JOptionPane.showMessageDialog(null,fecha);
+        } else if (tipoEnsamble.equals("mueble") && tipoMuebleEnsamble != null && user != null && fecha != null) {
+
             try {
-                DBEnsambleMueble dbmueble=new DBEnsambleMueble();
+                DBEnsambleMueble dbmueble = new DBEnsambleMueble();
                 dbmueble.agregarEnsambleMueble(tipoMuebleEnsamble, user, fecha);
                 response.sendRedirect("fabricajsp.jsp?user=" + user);
+                JOptionPane.showMessageDialog(null, "ensamble de mueble hecho");
             } catch (SQLException | MiMuebleriaException ex) {
-                response.sendRedirect("muebleria/ErrorFabrica.jsp?user"+user+"&error=Error al crear ensable de mueble");
+                response.sendRedirect("muebleria/ErrorFabrica.jsp?user" + user + "&error=Error al crear ensable de mueble");
             }
+        } else {
+            response.sendRedirect("muebleria/ErrorFabrica.jsp?user" + user + "&error=Error al crear ensamble de mueble");
         }
 
     }

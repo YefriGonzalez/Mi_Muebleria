@@ -11,6 +11,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <%!
+    String username;
     String tipoConsulta;
     String nitCliente;
     String fechaInicial;
@@ -25,6 +26,7 @@
 %>
 
 <%
+    username=request.getParameter("user");
     nit = request.getParameter("nitFactura");
     tipoConsulta = request.getParameter("tipoConsulta");
     nitCliente = request.getParameter("nitClienteConsultaCompra");
@@ -50,7 +52,7 @@
                     PreparedStatement consulta1 = (PreparedStatement) Conexion.conexion().prepareStatement("SELECT *FROM venta WHERE nitVenta='" + nitCliente + "';");
                     result = consulta1.executeQuery();
                 } else {
-                    response.sendRedirect("ErroresVentas.jsp?error=Nit incorrecto");
+                    response.sendRedirect("ErroresVentas.jsp?user="+username+"&error=Nit incorrecto");
                 }
         %>
         <div>
@@ -58,7 +60,7 @@
             <h3>Fecha Inicial: <%=fechaInicial%></h3>
             <h3>Fecha Final: <%=fechaFinal%></h3>
             <li id="back" class="btn btn-default btn-lg">
-                <a href="../ventasJsp.jsp"> Regresar</a>
+                <a href="../ventasJsp.jsp?user=<%=username%>"> Regresar</a>
             </li>
             <table class="table table-bordered">
                 <thead>
@@ -97,7 +99,7 @@
                     PreparedStatement consulta2 = (PreparedStatement) Conexion.conexion().prepareStatement("SELECT *FROM devolucion WHERE nitVenta='" + nitDev + "';");
                     result2 = consulta2.executeQuery();
                 } else {
-                    response.sendRedirect("ErroresVentas.jsp?error=Nit incorrecto");
+                    response.sendRedirect("ErroresVentas.jsp?user="+username+"&error=Nit incorrecto");
                 }
         %>
         <div>
@@ -105,7 +107,7 @@
             <h3>Fecha Inicial: <%=fechaIniDevolucion%></h3>
             <h3>Fecha Final: <%=fechaFinDevolucion%></h3>
             <li id="back" class="btn btn-default btn-lg">
-                <a href="../ventasJsp.jsp"> Regresar</a>
+                <a href="../ventasJsp.jsp?user=<%=username%>"> Regresar</a>
             </li>
             <table class="table table-bordered">
                 <thead>
@@ -140,14 +142,14 @@
                     PreparedStatement consulta3 = (PreparedStatement) Conexion.conexion().prepareStatement("SELECT *FROM cliente WHERE nit='" + nit + "'");
                     result3 = consulta3.executeQuery();
                 } else {
-                    response.sendRedirect("ErroresVentas.jsp?error=Nit incorrecto");
+                    response.sendRedirect("ErroresVentas.jsp?user="+username+"&error=Nit incorrecto");
                 }
 
         %>
         <div>
             <h1>Consulta de faactura de un cliente</h1>
             <li id="back" class="btn btn-default btn-lg">
-                <a href="../ventasJsp.jsp"> Regresar</a>
+                <a href="../ventasJsp.jsp?user=<%=username%>"> Regresar</a>
             </li>
             <table class="table table-bordered">
                 <thead>

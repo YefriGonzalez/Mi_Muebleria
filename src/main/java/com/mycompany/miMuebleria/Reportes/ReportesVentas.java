@@ -22,6 +22,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
+import javax.swing.JOptionPane;
 import javax.swing.text.Document;
 
 /**
@@ -52,32 +53,41 @@ public class ReportesVentas extends HttpServlet {
                 if (!fechaInicial.isEmpty() && !fechFinal.isEmpty()) {
                     PreparedStatement consulta = (PreparedStatement) Conexion.conexion().prepareStatement("SELECT a.mueble,b.precio FROM venta a JOIN mueble b ON(a.mueble=b.nombreMueble) AND a.fecha>='" + fechaInicial + "' AND a.fecha<='" + fechFinal + "';");
                     ResultSet result = consulta.executeQuery();
+                    fw.append("Mueble");
+                    fw.append(",");
+                    fw.append("Costo");
+                    fw.append("\n");
                     while (result.next()) {
                         fw.append(result.getString(1));
                         fw.append(",");
                         fw.append(result.getString(2));
-                        fw.append(";");
                         fw.append("\n");
                     }
-                    request.setAttribute("archivo", fw);
-                    request.getRequestDispatcher("DescargaArchivo/Download.jsp").forward(request, response);
+                    fw.flush();
+                    fw.close();
+                    request.getRequestDispatcher("DescargaArchivo/Download.jsp?archivo=" + filename + "&nombre=Reporte de Ventas Generado").forward(request, response);
                 } else {
                     PreparedStatement consulta1 = (PreparedStatement) Conexion.conexion().prepareStatement("SELECT a.mueble,b.precio FROM venta a JOIN mueble b ON(a.mueble=b.nombreMueble);");
                     ResultSet result1 = consulta1.executeQuery();
+                    fw.append("Mueble");
+                    fw.append(",");
+                    fw.append("Costo");
+                    fw.append("\n");
                     while (result1.next()) {
                         fw.append(result1.getString(1));
                         fw.append(",");
                         fw.append(result1.getString(2));
-                        fw.append(";");
                         fw.append("\n");
                     }
-                    request.setAttribute("archivo", fw);
-                    request.getRequestDispatcher("DescargaArchivo/Download.jsp").forward(request, response);
+                    fw.flush();
+                    fw.close();
+                    request.getRequestDispatcher("DescargaArchivo/Download.jsp?archivo=" + filename + "&nombre=Reporte de Ventas Generado").forward(request, response);
                 }
             } catch (MiMuebleriaException | SQLException e) {
                 response.sendRedirect("muebleria/ErrorAdmin.jsp?error=Error al Escribrir datos archivo");
             }
         } catch (IOException e) {
+            JOptionPane.showMessageDialog(null, e);
             response.sendRedirect("muebleria/ErrorAdmin.jsp?error=No se encuentra el archivo!");
         }
     }

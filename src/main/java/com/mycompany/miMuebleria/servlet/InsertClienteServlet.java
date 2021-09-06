@@ -44,6 +44,7 @@ public class InsertClienteServlet extends HttpServlet {
         String direccion = request.getParameter("direccion");
         String muncipio = request.getParameter("municipio");
         String departamento = request.getParameter("departamento");
+        String username=request.getParameter("user");
         if (nombreCliente != null && nitCliente != null && !nitCliente.contains("-") && direccion != null && muncipio != null && departamento != null) {
             Cliente cliente = new Cliente(nombreCliente, nitCliente, direccion, muncipio, departamento);
             try {
@@ -54,9 +55,9 @@ public class InsertClienteServlet extends HttpServlet {
                 insertCliente.setString(4, cliente.getMunicipio());
                 insertCliente.setString(5, cliente.getDepartamento());
                 insertCliente.execute();
-                response.sendRedirect("ventasJsp.jsp");
+                response.sendRedirect("ventasJsp.jsp?user="+username);
             } catch (SQLException | MiMuebleriaException ex) {
-                response.sendRedirect("muebleria/ErroresVentas.jsp?error=Error al Agregar cliente");
+                response.sendRedirect("muebleria/ErroresVentas.jsp?user="+username+"&error=Error al Agregar cliente");
             }
         } else if (nombreCliente != null && nitCliente != null && !nitCliente.contains("-") && direccion != null && muncipio == null && departamento == null) {
             try {
@@ -66,12 +67,12 @@ public class InsertClienteServlet extends HttpServlet {
                 insertCliente.setString(2, cliente.getNIT());
                 insertCliente.setString(3, cliente.getDireccion());
                 insertCliente.execute();
-                response.sendRedirect("ventasJsp.jsp");
+                response.sendRedirect("ventasJsp.jsp?user="+username);
             } catch (MiMuebleriaException | SQLException ex) {
-                response.sendRedirect("muebleria/ErroresVentas.jsp?error=Error al agregar Cliente");
+                response.sendRedirect("muebleria/ErroresVentas.jsp?user="+username+"&error=Error al agregar Cliente");
             }
         } else {
-            response.sendRedirect("muebleria/ErroresVentas.jsp?error=Datos Incorrectos");
+            response.sendRedirect("muebleria/ErroresVentas.jsp?user="+username+"&error=Datos Incorrectos");
         }
     }
 }

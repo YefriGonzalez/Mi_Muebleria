@@ -15,7 +15,7 @@
     resultMueble = consultaMueble.executeQuery();
     PreparedStatement consultaPieza = (PreparedStatement) Conexion.conexion().prepareStatement("SELECT DISTINCT tipo,costo FROM pieza");
     resultPieza = consultaPieza.executeQuery();
-    PreparedStatement consultaEnsambleMueble = (PreparedStatement) Conexion.conexion().prepareStatement("SELECT DISTINCT a.mueble FROM ensamble_mueble a WHERE NOT EXISTS(SELECT NULL FROM venta b WHERE a.mueble=b.mueble)");
+    PreparedStatement consultaEnsambleMueble = (PreparedStatement) Conexion.conexion().prepareStatement("SELECT DISTINCT a.mueble FROM ensamble_pieza a WHERE NOT EXISTS(SELECT NULL FROM ensamble_mueble b WHERE a.mueble=b.mueble)");
     resultEnsamblePieza = consultaEnsambleMueble.executeQuery();
 %>
 <!DOCTYPE html>

@@ -45,9 +45,9 @@ public class Usuario_Servlet extends HttpServlet {
                 if (num == 1) {
                     response.sendRedirect("fabricajsp.jsp?user=" + username);
                 } else if (num == 2) {
-                    response.sendRedirect("ventasJsp.jsp");
+                    response.sendRedirect("ventasJsp.jsp?user="+username);
                 } else if (num == 3) {
-                    response.sendRedirect("administracionJsp.jsp");
+                    response.sendRedirect("administracionJsp.jsp?user="+username);
                 } else {
                     response.sendRedirect("muebleria/ErrorLogin.jsp?error=Username o Password Incorrectos");
                 }

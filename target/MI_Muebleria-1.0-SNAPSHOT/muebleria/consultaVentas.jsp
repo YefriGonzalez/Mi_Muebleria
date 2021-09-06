@@ -10,6 +10,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <%!
+    String username;
     ResultSet result = null;
     ResultSet result2=null;
     ResultSet result3=null;
@@ -17,7 +18,8 @@
     ResultSet result5=null;
 %>
 <%
-    PreparedStatement consulta = (PreparedStatement) Conexion.conexion().prepareStatement("SELECT  *FROM ensamble_mueble a WHERE NOT EXISTS (SELECT NULL FROM venta b WHERE a.mueble=b.mueble)");
+    username=request.getParameter("user");
+    PreparedStatement consulta = (PreparedStatement) Conexion.conexion().prepareStatement("SELECT  *FROM ensamble_mueble a WHERE NOT EXISTS (SELECT NULL FROM venta b WHERE a.mueble=b.mueble) AND NOT EXISTS (SELECT NULL FROM devolucion c WHERE a.mueble=c.mueble);");
     result = consulta.executeQuery();
 %>
 <html>
@@ -29,7 +31,7 @@
     <body>
         <h1></h1>
     <li id="back" class="btn btn-default btn-lg">
-        <a href="../ventasJsp.jsp"> Regresar</a>
+        <a href="../ventasJsp.jsp?user=<%=username%>"> Regresar</a>
     </li>
     <div>
         <table class="table table-bordered">

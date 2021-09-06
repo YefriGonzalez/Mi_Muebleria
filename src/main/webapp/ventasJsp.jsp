@@ -5,6 +5,13 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%! 
+String username;
+%>
+
+<%
+username=request.getParameter("user");
+%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -16,6 +23,7 @@
     <body>
         <header>Areá de Ventas</header>
         <div class="logout">
+            <h4><%=username%></h4>
             <ul class="cerrarSesion">
                 <li><a href="index.jsp">Cerrar Sesion</a></li>
             </ul>
@@ -23,10 +31,10 @@
         <div class="ventas">
             <nav class="nav">
                 <ul class="menu">
-                    <li><a href="muebleria/consultaVentas.jsp">Consulta de Muebles disponibles en la sala de Ventas</a>
-                    <li><a href="muebleria/consultaVentasDelDia.jsp">Consulta de Ventas del dia</a></li>
+                    <li><a href="muebleria/consultaVentas.jsp?user=<%=username%>">Consulta de Muebles disponibles en la sala de Ventas</a>
+                    <li><a href="muebleria/consultaVentasDelDia.jsp?user=<%=username%>">Consulta de Ventas del dia</a></li>
                     <li><a href="#">Consulta de compras de un Cliente en un intervalo de tiempo</a>
-                        <form id="form" method="POST" action="muebleria/consultaClienteIntervalo.jsp?tipoConsulta=CompraIntervalo" style="height: 250px;">
+                        <form id="form" method="POST" action="muebleria/consultaClienteIntervalo.jsp?tipoConsulta=CompraIntervalo&user=<%=username%>" style="height: 250px;">
                             NIT:
                             <input type="text" class="form-control" name="nitClienteConsultaCompra" placeholder="NIT" required>
                             Fecha Inicial:
@@ -38,7 +46,7 @@
                         </form>
                     </li>
                     <li><a href="#">Consulta de devoluciones Realizadas por un cliente en un intervalo de tiempo</a>
-                        <form id="form" method="POST" action="muebleria/consultaClienteIntervalo.jsp?tipoConsulta=devolucionIntervalo" style="height: 250px;"> 
+                        <form id="form" method="POST" action="muebleria/consultaClienteIntervalo.jsp?tipoConsulta=devolucionIntervalo&user=<%=username%>" style="height: 250px;"> 
                             NIT:
                             <input type="text"  class="form-control" name="nitClienteConsultaDevolucion" placeholder="NIT" required>
                             Fecha Inicial:
@@ -50,7 +58,7 @@
                         </form>
                     </li>
                     <li><a href="#">Detalle de la factura de un cliente</a>
-                        <form  id="form" method="POST" action="muebleria/consultaClienteIntervalo.jsp?tipoConsulta=facturaCliete" style="height: 200px">
+                        <form  id="form" method="POST" action="muebleria/consultaClienteIntervalo.jsp?tipoConsulta=facturaCliete&user=<%=username%>" style="height: 200px">
                             <h3>Consulta</h3>
                             NIT:
                             <input type="text" class="form-control"name="nitFactura" placeholder="NIT" required/>
@@ -62,7 +70,7 @@
             </nav>
         </div>
         <div class="container">
-            <form class="form-control" method="POST" action="VentaServlet" style="width: 500px; margin:0;height: 280px;margin-top:15%;text-align: center;"/>
+            <form class="form-control" method="POST" action="VentaServlet?user=<%=username%>" style="width: 500px; margin:0;height: 280px;margin-top:15%;text-align: center;"/>
             <h3>Venta de Mueble</h3>
             Tipo de mueble:
             <input type="text" class="form-control" name="tipoMuebleVenta" placeholder="Tipo de Mueble"required />
@@ -74,7 +82,7 @@
         </form>
     </div>
     <div class="container">
-        <form class="form-control" method="POST" action="InsertClienteServlet" style="width: 500px; height: 400px;margin-top:15%;margin-left: 600px;text-align: center;">
+        <form class="form-control" method="POST" action="InsertClienteServlet?user=<%=username%>" style="width: 500px; height: 400px;margin-top:15%;margin-left: 600px;text-align: center;">
             <h3>Agregar Cliente</h3>
             Nombre:
             <input type="text" class="form-control" name="nombreCliente" placeholder="Ej. Juan" required/>
@@ -91,7 +99,7 @@
         </form>
     </div>
     <div class="container">
-        <form class="form-control" method="POST" action="DevolucionServlet" style="width: 500px; height: 270px;margin-top:33%;margin-left:0; text-align: center;">
+        <form class="form-control" method="POST" action="DevolucionServlet?user=<%=username%>" style="width: 500px; height: 270px;margin-top:33%;margin-left:0; text-align: center;">
             <h3>Devolucion de Mueble</h3>
             Mueble:
             <input type="text" class="form-control" name="tipoMuebleDevolucion" placeholder="Tipo de Mueble" required/>

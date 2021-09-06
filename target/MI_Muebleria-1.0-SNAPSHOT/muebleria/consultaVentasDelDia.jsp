@@ -7,6 +7,7 @@
 <%@page import="java.sql.PreparedStatement"%>
 <%@page import="com.mycompany.mimuebleria.DB.Conexion"%>
 <%!
+    String username;
     ResultSet result = null;
     ResultSet result2 = null;
     ResultSet result3 = null;
@@ -14,6 +15,7 @@
     ResultSet result5 = null;
 %>
 <%
+    username=request.getParameter("user");
     PreparedStatement consultaDelDia = (PreparedStatement) Conexion.conexion().prepareStatement("SELECT *FROM venta WHERE fecha=CURDATE()");
     result2 = consultaDelDia.executeQuery();
 %>
@@ -28,7 +30,7 @@
     <body>
         <h1>Consulta de ventas del dia</h1>
     <li id="back" class="btn btn-default btn-lg">
-        <a href="../ventasJsp.jsp"> Regresar</a>
+        <a href="../ventasJsp.jsp?user=<%=username%>"> Regresar</a>
     </li>
     <div>
         <table class="table table-bordered">

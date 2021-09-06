@@ -20,7 +20,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -43,29 +42,30 @@ public class VentaServlet extends HttpServlet {
             throws ServletException, IOException {
         String tipoMueble = request.getParameter("tipoMuebleVenta");
         String nitVenta = request.getParameter("nitClienteVenta");
+        String username=request.getParameter("user");
         try {
             if (tipoMueble != null && nitVenta != null && !nitVenta.contains("-")) {
                 if (nitExistente(nitVenta)) {
                     if (muebleExistente(tipoMueble)) {
                         Venta venta = new Venta(tipoMueble, nitVenta);
-                        PreparedStatement insertVenta = (PreparedStatement) Conexion.conexion().prepareStatement("INSERT INTO venta(mueble,nitVenta,fecha) VALUES(?,?,?)");
+                        PreparedStatement insertVenta = (PreparedStatement) Conexion.conexion().prepareStatement("INSERT INTO venta(mueble,nitVenta,fecha,user) VALUES(?,?,?,?)");
                         insertVenta.setString(1, venta.getMueble());
                         insertVenta.setString(2, venta.getNitVenta());
                         insertVenta.setDate(3, java.sql.Date.valueOf(LocalDate.now()));
+                        insertVenta.setString(4, username);
                         insertVenta.execute();
-                        response.sendRedirect("ventasJsp.jsp");
+                        response.sendRedirect("ventasJsp.jsp?user="+username);
                     } else {
-                        response.sendRedirect("muebleria/ErroresVentas.jsp?error=Mueble No existe");
+                        response.sendRedirect("muebleria/ErroresVentas.jsp?user="+username+"&error=Mueble No existe");
                     }
                 } else {
-                    response.sendRedirect("muebleria/ErroresVentas.jsp?error=Nit no existente");
+                    response.sendRedirect("muebleria/ErroresVentas.jsp?user="+username+"&error=Nit no existente");
                 }
-
             } else {
-                response.sendRedirect("muebleria/ErroresVentas.jsp?error=Nit contiene -");
+                response.sendRedirect("muebleria/ErroresVentas.jsp?user="+username+"&error=Nit contiene -");
             }
         } catch (SQLException | MiMuebleriaException ex) {
-            response.sendRedirect("muebleria/ErroresVentas.jsp?error=Erro al procesar Venta");
+            response.sendRedirect("muebleria/ErroresVentas.jsp?user="+username+"&error=Erro al procesar Venta");
         }
     }
 

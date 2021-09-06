@@ -42,7 +42,7 @@
                             Fecha Final:
                             <input type="date" class="form-control" name="fechaFinalGanancias" placeholder="Fecha">
                             <br>
-                            <input type="submit" class="btn btn-danger" value="Consultar">
+                            <input type="submit" class="btn btn-danger" value="Generar Reporte">
                         </form>
                     </li>
                     <li><a href="#">Reporte del mueble menos vendido</a>
@@ -52,7 +52,7 @@
                             Fecha Final:
                             <input type="date" class="form-control" name="fechaFinalGanancias" placeholder="Fecha">
                             <br>
-                            <input type="submit" class="btn btn-danger" value="Consultar">
+                            <input type="submit" class="btn btn-danger" value="Generar Reporte">
                         </form>
                     </li>
                     <li><a href="#">Reporte de ventas en un intervalo de Tiempo</a>
@@ -63,17 +63,17 @@
                             <input type="date" class="form-control" name="fechaFinalReporteVenta" placeholder="Fecha">
                             <br>
                             <span>
-                            <input type="submit" class="btn btn-danger"  value="Consultar">
+                            <input type="submit" class="btn btn-danger"  value="Generar Reporte">
                         </form>
                     </li>
                     <li><a href="#">Reporte de devoluciones en un intervalo de tiempo</a>
-                        <form id="form" class="form-control" method="POST" action="" style="height: 200px;width: 300px;"> 
+                        <form id="form" class="form-control" method="POST" action="ReportesDevolucionServlet" style="height: 200px;width: 300px;"> 
                             Fecha Inicial:
                             <input type="date" class="form-control" name="fechaInicioReporteDevoluciones" placeholder="Fecha">
                             Fecha Final:
                             <input type="date" class="form-control" name="fechaFinalReporteDevoluciones" placeholder="Fecha">
                             <br>
-                            <input type="submit" class="btn btn-danger" value="Consultar">
+                            <input type="submit" class="btn btn-danger" value="Generar Reporte">
                         </form>
                     </li>
                     <li><a href="#">Reporte de ganancias en un intervalo de tiempo</a>
@@ -83,17 +83,17 @@
                             Fecha Final:
                             <input type="date" class="form-control" name="fechaFinalGanancias" placeholder="Fecha">
                             <br>
-                            <input type="submit" class="btn btn-danger" value="Consultar">
+                            <input type="submit" class="btn btn-danger" value="Generar Reporte">
                         </form>
                     </li>
                     <li><a href="#">Reporte del usuario que registra más ventas en un intervalo de tiempo</a>
-                        <form  id="form" class="form-control" method="POST" action="" style="height: 200px ;width: 300px;">
+                        <form  id="form" class="form-control" method="POST" action="ReporteUsuarioMasVentas" style="height: 200px ;width: 300px;">
                             Fecha Inicial:
-                            <input type="date" class="form-control" name="fechaInicioGanancias" placeholder="Fecha">
+                            <input type="date" class="form-control" name="fechaInicioMasVentas" placeholder="Fecha">
                             Fecha Final:
-                            <input type="date" class="form-control" name="fechaFinalGanancias" placeholder="Fecha">
+                            <input type="date" class="form-control" name="fechaFinalMasVentas" placeholder="Fecha">
                             <br>
-                            <input type="submit" class="btn btn-danger" value="Consultar">
+                            <input type="submit" class="btn btn-danger" value="Generar Reporte">
                         </form>
                     </li>
                     <li><a href="#">Reporte del usuario que registra más ganancias en un intervalo de tiempo</a>
@@ -103,7 +103,7 @@
                             Fecha Final:
                             <input type="date" class="form-control" name="fechaFinalGanancias" placeholder="Fecha">
                             <br>
-                            <input type="submit" class="btn btn-danger" value="Consultar">
+                            <input type="submit" class="btn btn-danger" value="Generar Reporte">
                         </form>
                     </li>
 
